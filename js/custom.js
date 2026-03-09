@@ -18,6 +18,29 @@ $(document).ready(function () {
         nav = $('.navbar-fixed-top,footer'),
         nav_height = nav.outerHeight();
 
+    function updateLamp() {
+        var activeItem = $('.tubelight-nav li a.active');
+        var lamp = $('#tubelight-lamp');
+        var nav = $('.tubelight-nav');
+        
+        if (activeItem.length && lamp.length && nav.length) {
+            var navOffset = nav.offset().left;
+            var itemOffset = activeItem.offset().left;
+            var left = itemOffset - navOffset;
+            var width = activeItem.outerWidth();
+            
+            lamp.css({
+                'opacity': '1',
+                'transform': 'translateX(' + left + 'px)',
+                'width': width + 'px'
+            });
+        }
+    }
+
+    $(window).on('resize', updateLamp);
+    $(window).on('load', function() { setTimeout(updateLamp, 100); });
+    updateLamp();
+
     $(window).on('scroll', function () {
         var cur_pos = $(this).scrollTop();
 
@@ -33,6 +56,7 @@ $(document).ready(function () {
                 nav.find('a[href="#' + $(this).attr('id') + '"]').addClass('active');
             }
         });
+        updateLamp();
     });
 
     nav.find('a').on('click', function () {

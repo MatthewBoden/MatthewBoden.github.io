@@ -84,6 +84,9 @@
 </head>
 
 <body>
+    <!-- Cybernetic Grid Shader Background -->
+    <div id="cybernetic-grid-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none;"></div>
+
     <div>
     <!-- Preloader -->
     <div id="preloader">
@@ -97,16 +100,22 @@
     <!-- ./Preloader -->
     
     <!-- header -->
-    <header class="navbar-fixed-top">
-        <nav>
+    <header class="navbar-fixed-top tubelight-header">
+        <nav class="tubelight-nav">
+            <div id="tubelight-lamp" class="tubelight-lamp">
+                <div class="tubelight-lamp-indicator">
+                    <div class="tubelight-lamp-glow-1"></div>
+                    <div class="tubelight-lamp-glow-2"></div>
+                </div>
+            </div>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" class="active"><i class="ion-home visible-xs"></i><span class="nav-text">Home</span></a></li>
+                <li><a href="#about"><i class="ion-person visible-xs"></i><span class="nav-text">About</span></a></li>
+                <li><a href="#education"><i class="ion-university visible-xs"></i><span class="nav-text">Education</span></a></li>
+                <li><a href="#experience"><i class="ion-briefcase visible-xs"></i><span class="nav-text">Experience</span></a></li>
+                <li><a href="#skills"><i class="ion-settings visible-xs"></i><span class="nav-text">Skills</span></a></li>
+                <li><a href="#projects"><i class="ion-folder visible-xs"></i><span class="nav-text">Projects</span></a></li>
+                <li><a href="#contact"><i class="ion-email visible-xs"></i><span class="nav-text">Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -1208,6 +1217,9 @@
 
     <!--  main script  -->
     <script src="js/custom.js"></script>
+    
+    <!-- Cybernetic Shader -->
+    <script src="js/cybernetic-shader-bundle.js"></script>
 
     </div>
     <div class="container-top">

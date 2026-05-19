@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Matthew Bodenstein | Lead AI Software Developer</title>
   <meta name="description" content="Portfolio of Matthew Bodenstein, Lead AI Software Developer and full-stack engineer based in Toronto.">
   <meta name="description:recruiters" content="Lead AI Software Developer with shipped full-stack, AI automation, and VR systems across Maxim, VUNO, and CarGenie.">
@@ -22,6 +22,7 @@
   <meta name="twitter:description" content="AI, full-stack, product engineering, and VR systems.">
   <meta name="twitter:image" content="https://matthewboden.github.io/img/about-img.jpg">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="LLM site summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -42,9 +43,16 @@
       --shadow: 0 20px 60px rgba(7, 10, 30, 0.65);
       --max: 1160px;
     }
+    body.egg-vr { --brand: #a78bff; --brand-2: #5ee4ff; }
+    body.egg-underwater #three-bg { filter: hue-rotate(35deg) saturate(1.2); }
+    body.debug-mode #three-bg { opacity: 0.72; }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
     body {
       margin: 0;
       font-family: Inter, Segoe UI, Arial, sans-serif;
@@ -53,6 +61,12 @@
         radial-gradient(1000px 540px at 100% 0%, rgba(139,124,255,0.20), transparent 50%),
         linear-gradient(180deg, #050816 0%, #060b1a 40%, #050816 100%);
       line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+    body.is-nav-open {
+      overflow: hidden;
+      touch-action: none;
     }
 
     ::selection { background: rgba(68, 217, 255, 0.24); color: #fff; }
@@ -168,7 +182,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-block: 10px;
+    }
+    .topbar-brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex: 1 1 auto;
+      min-width: 0;
     }
     .brand {
       text-decoration: none;
@@ -177,6 +201,65 @@
       letter-spacing: 0.08em;
       font-size: 0.84rem;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+    .nav-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      cursor: pointer;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle-icon {
+      position: relative;
+      width: 18px;
+      height: 12px;
+    }
+    .nav-toggle-icon::before,
+    .nav-toggle-icon::after,
+    .nav-toggle-icon span {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+      transition: transform 200ms ease, top 200ms ease, opacity 200ms ease;
+    }
+    .nav-toggle-icon::before { top: 0; }
+    .nav-toggle-icon > span {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 100%;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+      transition: opacity 200ms ease;
+    }
+    .nav-toggle-icon::after { top: 10px; }
+    .topbar.is-nav-open .nav-toggle-icon::before {
+      top: 5px;
+      transform: rotate(45deg);
+    }
+    .topbar.is-nav-open .nav-toggle-icon span {
+      opacity: 0;
+    }
+    .topbar.is-nav-open .nav-toggle-icon::after {
+      top: 5px;
+      transform: rotate(-45deg);
     }
     .nav {
       display: flex;
@@ -190,8 +273,6 @@
       font-size: 0.92rem;
       transition: color 180ms ease;
     }
-    .nav a:hover { color: #fff; }
-
     .hero {
       padding: 90px 0 70px;
       position: relative;
@@ -290,9 +371,17 @@
       border-radius: 999px;
       padding: 12px 18px;
       font-weight: 600;
+      font-size: 0.92rem;
+      line-height: 1.2;
       transition: transform 190ms ease, border-color 190ms ease, background 190ms ease, box-shadow 190ms ease;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
     }
     .btn::after {
       content: "";
@@ -306,19 +395,10 @@
       transition: left 340ms ease;
       pointer-events: none;
     }
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.36);
-    }
-    .btn:hover::after { left: 120%; }
     .btn-primary {
       border-color: rgba(68, 217, 255, 0.45);
       background: linear-gradient(135deg, rgba(68,217,255,0.18), rgba(139,124,255,0.2));
       box-shadow: 0 10px 28px rgba(68, 217, 255, 0.20);
-    }
-    .btn-primary:hover {
-      background: linear-gradient(135deg, rgba(68,217,255,0.27), rgba(139,124,255,0.27));
-      box-shadow: 0 14px 34px rgba(68, 217, 255, 0.25);
     }
 
     section {
@@ -426,10 +506,26 @@
       opacity: 0.7;
     }
     .project.featured { grid-column: span 12; }
-    .project:hover {
-      transform: translateY(-6px) scale(1.01);
-      border-color: rgba(68, 217, 255, 0.45);
-      box-shadow: 0 20px 42px rgba(7, 16, 44, 0.74), 0 0 0 1px rgba(68, 217, 255, 0.15);
+    @media (hover: hover) and (pointer: fine) {
+      .project:hover {
+        transform: translateY(-6px) scale(1.01);
+        border-color: rgba(68, 217, 255, 0.45);
+        box-shadow: 0 20px 42px rgba(7, 16, 44, 0.74), 0 0 0 1px rgba(68, 217, 255, 0.15);
+      }
+      .project:hover .project-media {
+        transform: scale(1.04);
+        filter: saturate(1.1) contrast(1.04);
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.36);
+      }
+      .btn:hover::after { left: 120%; }
+      .btn-primary:hover {
+        background: linear-gradient(135deg, rgba(68,217,255,0.27), rgba(139,124,255,0.27));
+        box-shadow: 0 14px 34px rgba(68, 217, 255, 0.25);
+      }
+      .nav a:hover { color: #fff; }
     }
     .project-media {
       aspect-ratio: 16 / 9;
@@ -473,10 +569,6 @@
       text-transform: uppercase;
       letter-spacing: 0.07em;
       font-weight: 700;
-    }
-    .project:hover .project-media {
-      transform: scale(1.04);
-      filter: saturate(1.1) contrast(1.04);
     }
     .project-body {
       padding: 18px;
@@ -843,6 +935,290 @@
       transition: width 90ms linear;
     }
 
+    .topbar-tools {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .tool-btn, .mode-chip, .filter-chip, .ask-chip {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 40px;
+      transition: border-color 160ms, color 160ms, background 160ms;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tool-btn:hover, .mode-chip:hover, .filter-chip:hover, .ask-chip:hover { color: #fff; border-color: rgba(255,255,255,0.35); }
+    .tool-btn.is-on, .mode-chip.is-active, .filter-chip.is-active {
+      color: #bff4ff;
+      border-color: rgba(68, 217, 255, 0.45);
+      background: rgba(68, 217, 255, 0.12);
+    }
+    .topbar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .now-building {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 10, 28, 0.55);
+    }
+    .mode-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .project-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .project.is-filtered-out { display: none; }
+    .project.egg-pulse { animation: egg-pulse 1.2s ease-in-out 3; }
+    .project.egg-wobble { animation: egg-wobble 0.9s ease-in-out; }
+    .project.egg-vr-glow { box-shadow: 0 0 40px rgba(167, 139, 255, 0.35); border-color: rgba(167, 139, 255, 0.5); }
+    .project.egg-agent-shimmer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(105deg, transparent 30%, rgba(68,217,255,0.12) 50%, transparent 70%);
+      animation: shimmer 2s linear infinite;
+    }
+    .project.egg-kevin { border-color: rgba(47, 226, 170, 0.45); }
+    .project { position: relative; }
+    .bacon-badge {
+      display: inline-flex;
+      margin-top: 8px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #bff8e8;
+      border: 1px solid rgba(47, 226, 170, 0.4);
+      background: rgba(47, 226, 170, 0.12);
+    }
+    @keyframes egg-pulse {
+      0%, 100% { box-shadow: 0 0 0 rgba(68, 217, 255, 0); }
+      50% { box-shadow: 0 0 36px rgba(68, 217, 255, 0.35); }
+    }
+    @keyframes egg-wobble {
+      0%, 100% { transform: perspective(900px) rotateX(0) rotateY(0); }
+      25% { transform: perspective(900px) rotateX(4deg) rotateY(-6deg) translateY(-4px); }
+      75% { transform: perspective(900px) rotateX(-3deg) rotateY(5deg) translateY(-2px); }
+    }
+    @keyframes shimmer {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(100%); }
+    }
+    .hero-typed { color: var(--brand); }
+    .ask-fab {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 90;
+      border-radius: 999px;
+      padding: 12px 16px;
+      border: 1px solid rgba(68, 217, 255, 0.45);
+      background: linear-gradient(135deg, rgba(68,217,255,0.2), rgba(139,124,255,0.22));
+      color: #e8edf8;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .ask-panel, .cmd-palette {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12vh 16px 16px;
+      background: rgba(2, 5, 16, 0.72);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+    .ask-panel.is-open, .cmd-palette.is-open { display: flex; }
+    .ask-dialog, .cmd-dialog {
+      width: min(520px, 96vw);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(8, 13, 29, 0.98), rgba(6, 10, 22, 0.98));
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .cmd-dialog { width: min(640px, 96vw); }
+    .ask-dialog h3, .cmd-dialog h3 { margin: 0 0 10px; font-size: 1rem; }
+    .ask-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    #askAnswer { margin: 0; color: #d5def0; font-size: 0.92rem; line-height: 1.55; min-height: 3em; }
+    .ask-close, .panel-close {
+      float: right;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      border-radius: 8px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+    }
+    #cmdInput {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    #cmdList { list-style: none; margin: 0; padding: 0; max-height: 50vh; overflow: auto; }
+    #cmdList .cmd-item {
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    #cmdList .cmd-item:hover { background: rgba(68, 217, 255, 0.1); }
+    .toast-host {
+      position: fixed;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 220;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .portfolio-toast {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(8, 13, 29, 0.95);
+      border: 1px solid rgba(68, 217, 255, 0.35);
+      color: #e8edf8;
+      font-size: 0.85rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 280ms, transform 280ms;
+    }
+    .portfolio-toast.is-visible { opacity: 1; transform: translateY(0); }
+    .confetti-host {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 210;
+      overflow: hidden;
+    }
+    .confetti-piece {
+      position: absolute;
+      top: 28%;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: confetti-fall 1.4s ease-out forwards;
+    }
+    @keyframes confetti-fall {
+      to { transform: translateY(60vh) rotate(540deg); opacity: 0; }
+    }
+    .debug-terminal {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 150;
+      display: none;
+      border: 1px solid rgba(68, 217, 255, 0.35);
+      border-radius: 12px;
+      background: rgba(4, 8, 20, 0.94);
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.78rem;
+    }
+    .debug-terminal.is-open { display: block; }
+    #debugOutput {
+      max-height: 120px;
+      overflow: auto;
+      padding: 10px 12px;
+      color: #9aa7c3;
+    }
+    .debug-line.debug-cmd { color: #44d9ff; }
+    #debugInput {
+      width: 100%;
+      border: none;
+      border-top: 1px solid var(--line);
+      background: transparent;
+      color: #e8edf8;
+      padding: 10px 12px;
+      font-family: inherit;
+    }
+    #fpsCounter {
+      position: fixed;
+      top: 48px;
+      right: 12px;
+      z-index: 130;
+      font-size: 0.72rem;
+      color: #44d9ff;
+      font-family: monospace;
+      padding: 4px 8px;
+      border: 1px solid rgba(68, 217, 255, 0.35);
+      border-radius: 6px;
+      background: rgba(4, 8, 20, 0.8);
+    }
+    .xr-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: none;
+      pointer-events: none;
+    }
+    .xr-overlay.is-active { display: flex; }
+    .xr-overlay::before, .xr-overlay::after {
+      content: "";
+      flex: 1;
+      background: inherit;
+      background-image: inherit;
+    }
+    .xr-overlay.is-active::before,
+    .xr-overlay.is-active::after {
+      background: url("img/about-img.jpg") center/cover no-repeat;
+      filter: saturate(1.4) contrast(1.1);
+      opacity: 0.35;
+    }
+    .xr-overlay.is-active {
+      background: #050816;
+      animation: xr-flash 3.2s ease forwards;
+    }
+    @keyframes xr-flash {
+      0%, 100% { opacity: 0; }
+      15%, 85% { opacity: 1; }
+    }
+    .footer-thanks-link {
+      display: block;
+      margin-top: 10px;
+      color: var(--brand);
+    }
+
     @media (max-width: 1024px) {
       .about-grid { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
@@ -852,16 +1228,195 @@
       .skills-wrap { grid-template-columns: 1fr; }
       .talent-strengths { grid-template-columns: 1fr; }
       .profile-photo { width: 250px; height: 250px; }
+      #three-bg { opacity: 0.38; }
     }
+
+    @media (max-width: 900px) {
+      .container {
+        width: min(var(--max), 94vw);
+      }
+      .nav-toggle { display: inline-flex; }
+      .topbar-inner {
+        align-items: stretch;
+        gap: 0;
+      }
+      .topbar-brand-row {
+        width: 100%;
+      }
+      .topbar-row {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 0 4px;
+        border-top: 1px solid var(--line);
+        margin-top: 4px;
+      }
+      .topbar.is-nav-open .topbar-row {
+        display: flex;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+      .nav a {
+        padding: 14px 4px;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .nav a:last-child { border-bottom: none; }
+      .topbar-tools {
+        padding-top: 10px;
+        justify-content: flex-start;
+      }
+      .tool-btn {
+        min-height: 44px;
+        padding: 10px 16px;
+        font-size: 0.85rem;
+      }
+      .case-modal {
+        padding: 0;
+        align-items: flex-end;
+      }
+      .case-panel {
+        width: 100%;
+        max-height: 92dvh;
+        border-radius: 18px 18px 0 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+      }
+      .ask-panel, .cmd-palette {
+        padding: 0;
+        align-items: flex-end;
+      }
+      .ask-dialog, .cmd-dialog {
+        width: 100%;
+        max-height: 88dvh;
+        border-radius: 18px 18px 0 0;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      #cmdList { max-height: 42dvh; }
+    }
+
     @media (max-width: 640px) {
-      .hero { padding: 74px 0 52px; }
-      .topbar-inner { min-height: 66px; }
-      .nav { gap: 10px; }
-      .nav a { font-size: 0.83rem; }
-      section { padding: 34px 0; }
-      .profile-photo { width: min(86vw, 320px); height: min(86vw, 320px); }
+      .hero { padding: 56px 0 44px; }
+      .hero-name {
+        font-size: clamp(2rem, 11vw, 3rem);
+        line-height: 1;
+        word-break: break-word;
+      }
+      .hero-headline {
+        font-size: clamp(1.25rem, 5.5vw, 1.65rem);
+        animation: none;
+      }
+      .hero p { font-size: 1rem; margin-top: 16px; }
+      .eyebrow {
+        font-size: 0.7rem;
+        padding: 7px 12px;
+        margin-bottom: 14px;
+      }
+      .mode-bar {
+        gap: 6px;
+      }
+      .mode-chip {
+        flex: 1 1 auto;
+        text-align: center;
+        font-size: 0.68rem;
+        padding: 8px 8px;
+      }
+      .cta-row {
+        flex-direction: column;
+        margin-top: 24px;
+        gap: 10px;
+      }
+      .cta-row .btn {
+        width: 100%;
+      }
+      section { padding: 32px 0; }
+      .section-head h2 { font-size: clamp(1.45rem, 6vw, 1.85rem); }
+      .topbar-inner { min-height: auto; }
+      .brand {
+        font-size: 0.72rem;
+        letter-spacing: 0.05em;
+        max-width: calc(100vw - 120px);
+      }
+      .now-building {
+        font-size: 0.7rem;
+        line-height: 1.45;
+        padding: 10px 14px;
+      }
+      .meta-grid { grid-template-columns: 1fr; }
+      .profile-photo {
+        width: min(100%, 280px);
+        height: auto;
+        aspect-ratio: 1;
+        max-height: 280px;
+      }
+      .card, .mini, .timeline-item, .project-body { padding: 16px; }
+      .project h3 { font-size: 1.1rem; }
+      .project-actions {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .project-actions .btn {
+        width: 100%;
+      }
+      .project-filters {
+        gap: 6px;
+      }
+      .filter-chip {
+        flex: 1 1 calc(50% - 3px);
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      main {
+        padding-bottom: max(72px, calc(56px + env(safe-area-inset-bottom)));
+      }
+      .contact-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .contact-links .btn { width: 100%; }
+      .contact { padding: 20px 16px; }
       .case-grid,
       .case-media-grid { grid-template-columns: 1fr; }
+      .case-modal { padding: 0; }
+      .ask-fab {
+        right: max(14px, env(safe-area-inset-right));
+        bottom: max(14px, env(safe-area-inset-bottom));
+        padding: 12px 14px;
+        font-size: 0.78rem;
+      }
+      .toast-host {
+        bottom: max(76px, calc(60px + env(safe-area-inset-bottom)));
+        width: min(92vw, 360px);
+      }
+      .portfolio-toast {
+        border-radius: 14px;
+        text-align: center;
+        line-height: 1.4;
+      }
+      .debug-terminal {
+        left: max(8px, env(safe-area-inset-left));
+        right: max(8px, env(safe-area-inset-right));
+        bottom: max(8px, env(safe-area-inset-bottom));
+      }
+      #three-bg { opacity: 0.28; }
+      .mesh::before, .mesh::after {
+        width: 220px;
+        height: 220px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .brand { font-size: 0.65rem; }
+      .mode-chip { font-size: 0.62rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -891,24 +1446,40 @@
   </div>
   <div class="noise"></div>
 
-  <header class="topbar">
+  <header class="topbar" id="siteTopbar">
     <div class="container topbar-inner">
-      <a href="#home" class="brand">MATTHEW BODENSTEIN</a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#impact">Impact</a>
-        <a href="#talents">Talents</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="topbar-brand-row">
+        <a href="#home" class="brand">MATTHEW BODENSTEIN</a>
+        <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+          <span class="nav-toggle-icon" aria-hidden="true"><span></span></span>
+        </button>
+      </div>
+      <div class="topbar-row" id="siteNav">
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#impact">Impact</a>
+          <a href="#talents">Talents</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="topbar-tools">
+          <button type="button" class="tool-btn" id="cmdOpen" title="Command palette (Ctrl+K)">⌘K</button>
+        </div>
+      </div>
     </div>
   </header>
+  <p class="now-building" id="nowBuilding" aria-live="polite"></p>
 
   <main>
     <section id="home" class="hero container reveal">
+      <div class="mode-bar" role="group" aria-label="Audience mode">
+        <button type="button" class="mode-chip is-active" data-mode="recruiter">Recruiter</button>
+        <button type="button" class="mode-chip" data-mode="builder">Builder</button>
+        <button type="button" class="mode-chip" data-mode="technical">Technical</button>
+      </div>
       <span class="eyebrow">Lead AI Software Developer</span>
       <h1 class="hero-name">Matthew Bodenstein</h1>
-      <h2 class="hero-headline">AI developer building practical products.</h2>
+      <h2 class="hero-headline">AI developer building <span class="hero-typed" id="heroTyped">practical products</span>.</h2>
       <p>
         I combine AI engineering, full-stack development, and product thinking to ship systems that reduce operational
         friction, improve decision quality, and create measurable outcomes.
@@ -1011,8 +1582,14 @@
         <h2>Featured Projects</h2>
         <p>Each project is framed as a product outcome with clear technical execution and business value.</p>
       </div>
+      <div class="project-filters" role="group" aria-label="Filter projects">
+        <button type="button" class="filter-chip is-active" data-filter="all">All</button>
+        <button type="button" class="filter-chip" data-filter="ai">AI</button>
+        <button type="button" class="filter-chip" data-filter="vr">VR</button>
+        <button type="button" class="filter-chip" data-filter="fullstack">Full-stack</button>
+      </div>
       <div class="projects-grid">
-        <article class="project featured">
+        <article class="project featured" data-category="vr" data-project="deepseeker">
           <img class="project-media" src="img/portfolio/DeepSeeker.png" alt="DeepSeeker game preview" onerror="this.style.display='none';">
           <div class="project-body">
             <span class="project-kicker">Immersive Systems</span>
@@ -1030,7 +1607,7 @@
           </div>
         </article>
 
-        <article class="project">
+        <article class="project" data-category="ai" data-project="classroom-agent">
           <div class="project-media-placeholder">
             <span>AI Multi-Agent System</span>
           </div>
@@ -1050,7 +1627,7 @@
           </div>
         </article>
 
-        <article class="project">
+        <article class="project" data-category="ai" data-project="ops-wellness">
           <img class="project-media" src="img/portfolio/AIWellness.png" alt="OPS AI Wellness Companion preview" onerror="this.style.display='none';">
           <div class="project-body">
             <span class="project-kicker">Hackathon Build</span>
@@ -1068,7 +1645,7 @@
           </div>
         </article>
 
-        <article class="project">
+        <article class="project" data-category="vr" data-project="mount-mail">
           <img class="project-media" src="img/portfolio/MountMail.png" alt="Mount and Mail VR preview" onerror="this.style.display='none';">
           <div class="project-body">
             <span class="project-kicker">Published VR Project</span>
@@ -1086,7 +1663,7 @@
           </div>
         </article>
 
-        <article class="project">
+        <article class="project" data-category="fullstack" data-project="kevin-bacon">
           <img class="project-media" src="img/portfolio/kevinBacon.png" alt="Kevin Bacon graph API preview" onerror="this.style.display='none';">
           <div class="project-body">
             <span class="project-kicker">Backend Engineering</span>
@@ -1232,6 +1809,40 @@
     <p>&copy; <span id="year"></span> Matthew Bodenstein. AI, full-stack, and product engineering portfolio.</p>
   </footer>
 
+  <div class="toast-host" id="toastHost" aria-live="polite"></div>
+  <div class="confetti-host" id="confettiHost" aria-hidden="true"></div>
+  <div id="fpsCounter" hidden>FPS: —</div>
+  <div class="xr-overlay" id="xrOverlay" aria-hidden="true"></div>
+
+  <button type="button" class="ask-fab" id="askOpen">Ask portfolio</button>
+  <div class="ask-panel" id="askPanel" aria-hidden="true">
+    <div class="ask-dialog" role="dialog" aria-labelledby="askTitle">
+      <button type="button" class="ask-close" id="askClose" aria-label="Close">×</button>
+      <h3 id="askTitle">Ask my portfolio</h3>
+      <div class="ask-chips">
+        <button type="button" class="ask-chip" data-ask="stack">Stack?</button>
+        <button type="button" class="ask-chip" data-ask="ai">AI work?</button>
+        <button type="button" class="ask-chip" data-ask="vr">VR?</button>
+        <button type="button" class="ask-chip" data-ask="contact">Contact?</button>
+        <button type="button" class="ask-chip" data-ask="hire">Hiring?</button>
+      </div>
+      <p id="askAnswer">Pick a question — predefined answers, no API required.</p>
+    </div>
+  </div>
+
+  <div class="cmd-palette" id="cmdPalette" aria-hidden="true">
+    <div class="cmd-dialog" role="dialog" aria-label="Command palette">
+      <h3>Command palette</h3>
+      <input type="text" id="cmdInput" placeholder="Jump to section, copy email, open case study…" autocomplete="off" spellcheck="false">
+      <ul id="cmdList"></ul>
+    </div>
+  </div>
+
+  <div class="debug-terminal" id="debugTerminal" aria-label="Debug terminal">
+    <div id="debugOutput"></div>
+    <input type="text" id="debugInput" placeholder="type help" autocomplete="off" spellcheck="false" aria-label="Debug command input">
+  </div>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1309,6 +1920,7 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="js/portfolio-extras.js"></script>
   <script>
     function initThreeBackground() {
       if (!window.THREE) return;
@@ -1493,7 +2105,10 @@
           if (frameGate !== 0) return;
         }
 
-        var t = performance.now() * 0.00035;
+        var threeState = window.__portfolioThree;
+        var boost = threeState ? threeState.boost : 1;
+        var t = performance.now() * 0.00035 * boost;
+        if (threeState && threeState.debugMode) t *= 1.65;
         knot.rotation.x = t * 0.95;
         knot.rotation.y = t * 1.3;
         ico.rotation.x = -t * 0.6;
@@ -1532,8 +2147,32 @@
 
         group.rotation.x += (mouseY * 0.16 - group.rotation.x) * 0.03;
         group.rotation.y += (mouseX * 0.16 - group.rotation.y) * 0.03;
+        if (threeState) {
+          group.rotation.x += (threeState.tiltX - group.rotation.x) * 0.04;
+          group.rotation.z += (threeState.tiltY - group.rotation.z) * 0.04;
+          if (threeState.debugMode && threeState.trackFps) threeState.trackFps();
+        }
         renderer.render(scene, camera);
       }
+
+      var fpsFrames = 0;
+      var fpsLast = performance.now();
+      window.__portfolioThree = {
+        boost: 1,
+        tiltX: 0,
+        tiltY: 0,
+        debugMode: false,
+        trackFps: function () {
+          fpsFrames += 1;
+          var now = performance.now();
+          if (now - fpsLast < 480) return;
+          var fpsEl = document.getElementById("fpsCounter");
+          if (fpsEl) fpsEl.textContent = "FPS: " + Math.round(fpsFrames * 1000 / (now - fpsLast));
+          fpsFrames = 0;
+          fpsLast = now;
+        }
+      };
+
       animate();
     }
 
@@ -1541,6 +2180,7 @@
       var heading = document.querySelector(".hero-name");
       if (!heading) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      if (window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
 
       var raf = null;
       var targetX = 50;
@@ -1664,6 +2304,7 @@
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
         document.body.style.overflow = "";
+        window.portfolioActiveCase = null;
       }
 
       function openModal(caseId) {
@@ -1685,6 +2326,7 @@
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
+        window.portfolioActiveCase = caseId;
       }
 
       document.querySelectorAll(".case-open").forEach(function (button) {
@@ -1702,40 +2344,57 @@
       });
     }
 
+    function applyAudienceMode(mode) {
+      var titleMap = {
+        recruiter: "Matthew Bodenstein | Lead AI Software Developer",
+        builder: "Matthew Bodenstein | AI & Full-Stack Product Builder",
+        technical: "Matthew Bodenstein | AI, Full-Stack, and VR Engineer"
+      };
+      var descriptionMap = {
+        recruiter: "Lead AI Software Developer with shipped full-stack, AI automation, and VR systems across Maxim, VUNO, and CarGenie.",
+        builder: "Builds practical AI-enabled web products, automation workflows, and modern user-facing software from design through deployment.",
+        technical: "React, TypeScript, Node.js, AI integrations, VR development, cloud deployment, and product-focused engineering."
+      };
+      var headlinePrefix = {
+        recruiter: "AI developer building",
+        builder: "Product builder shipping",
+        technical: "Engineer crafting"
+      };
+
+      var selectedTitle = titleMap[mode];
+      var selectedDescription = descriptionMap[mode];
+      if (!selectedTitle) return;
+
+      document.title = selectedTitle;
+      var ogTitle = document.querySelector("meta[property='og:title']");
+      var twitterTitle = document.querySelector("meta[name='twitter:title']");
+      if (ogTitle) ogTitle.setAttribute("content", selectedTitle);
+      if (twitterTitle) twitterTitle.setAttribute("content", selectedTitle);
+
+      var metaDescription = document.querySelector("meta[name='description']");
+      var ogDescription = document.querySelector("meta[property='og:description']");
+      var twitterDescription = document.querySelector("meta[name='twitter:description']");
+      if (metaDescription) metaDescription.setAttribute("content", selectedDescription);
+      if (ogDescription) ogDescription.setAttribute("content", selectedDescription);
+      if (twitterDescription) twitterDescription.setAttribute("content", selectedDescription);
+
+      var heroHeadline = document.querySelector(".hero-headline");
+      var heroTyped = document.getElementById("heroTyped");
+      if (heroHeadline && heroTyped && headlinePrefix[mode]) {
+        heroHeadline.childNodes[0].textContent = headlinePrefix[mode] + " ";
+      }
+    }
+    window.portfolioApplyAudienceMode = applyAudienceMode;
+
     function applySeoVariants() {
       var params = new URLSearchParams(window.location.search);
       var titleVariant = params.get("titleVariant");
       var descriptionFocus = params.get("descriptionFocus");
-
-      var titleMap = {
-        recruiter: "Matthew Bodenstein | Lead AI Software Developer",
-        client: "Matthew Bodenstein | AI & Full-Stack Product Builder",
-        technical: "Matthew Bodenstein | AI, Full-Stack, and VR Engineer"
-      };
-      var descriptionMap = {
-        recruiters: "Lead AI Software Developer with shipped full-stack, AI automation, and VR systems across Maxim, VUNO, and CarGenie.",
-        clients: "Builds practical AI-enabled web products, automation workflows, and modern user-facing software from design through deployment.",
-        technical: "React, TypeScript, Node.js, AI integrations, VR development, cloud deployment, and product-focused engineering."
-      };
-
-      var selectedTitle = titleMap[titleVariant];
-      if (selectedTitle) {
-        document.title = selectedTitle;
-        var ogTitle = document.querySelector("meta[property='og:title']");
-        var twitterTitle = document.querySelector("meta[name='twitter:title']");
-        if (ogTitle) ogTitle.setAttribute("content", selectedTitle);
-        if (twitterTitle) twitterTitle.setAttribute("content", selectedTitle);
-      }
-
-      var selectedDescription = descriptionMap[descriptionFocus];
-      if (selectedDescription) {
-        var metaDescription = document.querySelector("meta[name='description']");
-        var ogDescription = document.querySelector("meta[property='og:description']");
-        var twitterDescription = document.querySelector("meta[name='twitter:description']");
-        if (metaDescription) metaDescription.setAttribute("content", selectedDescription);
-        if (ogDescription) ogDescription.setAttribute("content", selectedDescription);
-        if (twitterDescription) twitterDescription.setAttribute("content", selectedDescription);
-      }
+      if (titleVariant === "client") titleVariant = "builder";
+      if (descriptionFocus === "clients") descriptionFocus = "builder";
+      if (descriptionFocus === "recruiters") descriptionFocus = "recruiter";
+      var mode = titleVariant || descriptionFocus || localStorage.getItem("portfolio-mode") || "recruiter";
+      applyAudienceMode(mode);
     }
 
     window.addEventListener("load", function () {
@@ -1744,6 +2403,7 @@
       initThreeBackground();
       initHeroNameInteraction();
       initCaseStudyModals();
+      if (window.portfolioInitExtras) window.portfolioInitExtras();
       setTimeout(function () {
         loader.classList.add("hide");
       }, 220);
@@ -1793,20 +2453,22 @@
     updateScrollProgress();
     window.addEventListener("scroll", updateScrollProgress, { passive: true });
 
-    var cards = document.querySelectorAll(".project");
-    cards.forEach(function (card) {
-      card.addEventListener("mousemove", function (event) {
-        var rect = card.getBoundingClientRect();
-        var x = event.clientX - rect.left;
-        var y = event.clientY - rect.top;
-        var rotateY = ((x / rect.width) - 0.5) * 8;
-        var rotateX = ((y / rect.height) - 0.5) * -8;
-        card.style.transform = "perspective(900px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-6px) scale(1.01)";
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      var cards = document.querySelectorAll(".project");
+      cards.forEach(function (card) {
+        card.addEventListener("mousemove", function (event) {
+          var rect = card.getBoundingClientRect();
+          var x = event.clientX - rect.left;
+          var y = event.clientY - rect.top;
+          var rotateY = ((x / rect.width) - 0.5) * 8;
+          var rotateX = ((y / rect.height) - 0.5) * -8;
+          card.style.transform = "perspective(900px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) translateY(-6px) scale(1.01)";
+        });
+        card.addEventListener("mouseleave", function () {
+          card.style.transform = "";
+        });
       });
-      card.addEventListener("mouseleave", function () {
-        card.style.transform = "";
-      });
-    });
+    }
   </script>
 </body>
 </html>

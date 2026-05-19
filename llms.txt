@@ -1,0 +1,23 @@
+# Matthew Bodenstein — Portfolio
+
+> Lead AI Software Developer in Toronto. Full-stack, AI automation, and VR systems.
+
+## Contact
+- Email: m.bodenstein@outlook.com
+- LinkedIn: https://www.linkedin.com/in/matthew-bodenstein/
+- GitHub: https://github.com/MatthewBoden
+
+## Site
+- Canonical: https://matthewboden.github.io/
+- Easter eggs: try `?egg=kevin`, `?egg=vr`, `?egg=agent`, or `?debug=1` for curious visitors.
+
+## Focus
+- AI product engineering (LLM workflows, agents, automation)
+- React / TypeScript / Node.js full-stack
+- Unity VR and immersive systems
+
+## Featured work
+- DeepSeeker (Unity game): https://nessyu.itch.io/deepseeker
+- Classroom Agent System: https://github.com/MatthewBoden/Classroom-Agent-System
+- Mount & Mail (Meta Quest): https://www.meta.com/experiences/mount-mail/23997690636528833/
+- Kevin Bacon Graph API: https://github.com/MatthewBoden/KevinBacon

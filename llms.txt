@@ -1,6 +1,6 @@
-# Matthew Bodenstein — Portfolio
+# Matthew Bodenstein - Portfolio
 
-> Lead AI Software Developer in Toronto. Full-stack, AI automation, and VR systems.
+> AI and full-stack engineer based in Toronto. Builds shipped products across AI, web, and VR.
 
 ## Contact
 - Email: m.bodenstein@outlook.com
@@ -12,7 +12,7 @@
 - Easter eggs: try `?egg=kevin`, `?egg=vr`, `?egg=agent`, or `?debug=1` for curious visitors.
 
 ## Focus
-- AI product engineering (LLM workflows, agents, automation)
+- AI product engineering (LLM workflows, RAG, agents, automation)
 - React / TypeScript / Node.js full-stack
 - Unity VR and immersive systems
 

@@ -3,23 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Matthew Bodenstein | Lead AI Software Developer</title>
-  <meta name="description" content="Portfolio of Matthew Bodenstein, Lead AI Software Developer and full-stack engineer based in Toronto.">
-  <meta name="description:recruiters" content="Lead AI Software Developer with shipped full-stack, AI automation, and VR systems across Maxim, VUNO, and CarGenie.">
-  <meta name="description:clients" content="Builds practical AI-enabled web products, automation workflows, and modern user-facing software from design through deployment.">
-  <meta name="description:technical" content="React, TypeScript, Node.js, AI integrations, VR development, cloud deployment, and product-focused engineering.">
+  <title>Matthew Bodenstein | Lead AI Software Engineer</title>
+  <meta name="description" content="Portfolio of Matthew Bodenstein, AI and full-stack engineer based in Toronto. Building shipped products across AI, web, and VR.">
+  <meta name="description:recruiters" content="AI and full-stack engineer with shipped products at Maxim, CarGenie, and VUNO. Comfortable owning entire builds from architecture to deployment.">
+  <meta name="description:clients" content="Builds AI-powered web products, dashboards, and automation tools. Full-stack delivery from design through deployment.">
+  <meta name="description:technical" content="React, TypeScript, Node.js, Claude/OpenAI APIs, PostgreSQL, Supabase, Unity. Production systems across AI, web, and VR.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="theme-color" content="#050816">
   <link rel="canonical" href="https://matthewboden.github.io/">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://matthewboden.github.io/">
-  <meta property="og:title" content="Matthew Bodenstein | Lead AI Software Developer">
-  <meta property="og:description" content="AI developer building practical products.">
+  <meta property="og:title" content="Matthew Bodenstein | Lead AI Software Engineer">
+  <meta property="og:description" content="AI and full-stack engineer building shipped products across web, AI, and VR.">
   <meta property="og:image" content="https://matthewboden.github.io/img/about-img.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Matthew Bodenstein | Lead AI Software Developer">
-  <meta name="twitter:description" content="AI, full-stack, product engineering, and VR systems.">
+  <meta name="twitter:title" content="Matthew Bodenstein | Lead AI Software Engineer">
+  <meta name="twitter:description" content="AI and full-stack engineer. Shipped products across web platforms, AI systems, and VR.">
   <meta name="twitter:image" content="https://matthewboden.github.io/img/about-img.jpg">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="alternate" type="text/plain" href="llms.txt" title="LLM site summary">
@@ -1430,6 +1430,368 @@
         transform: none;
       }
     }
+
+    .arcade-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .arcade-card {
+      border: 1px solid var(--line);
+      background: rgba(8, 13, 29, 0.92);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+    .arcade-card h3 {
+      margin: 0 0 4px;
+      font-size: 1.1rem;
+    }
+    .arcade-card .arcade-sub {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin: 0 0 14px;
+    }
+    .arcade-card canvas {
+      display: block;
+      margin: 0 auto 12px;
+      border-radius: 10px;
+      background: #0a0f1e;
+      border: 1px solid rgba(68, 217, 255, 0.25);
+      max-width: 100%;
+    }
+    .arcade-card .arcade-controls {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .arcade-card .arcade-controls button {
+      padding: 7px 16px;
+      border: 1px solid rgba(68, 217, 255, 0.35);
+      background: rgba(68, 217, 255, 0.1);
+      color: #bff4ff;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .arcade-card .arcade-controls button:hover {
+      background: rgba(68, 217, 255, 0.22);
+      border-color: rgba(68, 217, 255, 0.6);
+    }
+    .arcade-score {
+      font-size: 0.85rem;
+      color: var(--ok);
+      font-weight: 600;
+      min-height: 1.4em;
+    }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 280px;
+      margin: 0 auto 12px;
+    }
+    .memory-cell {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      background: rgba(139, 124, 255, 0.1);
+      border-radius: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s, background 0.18s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .memory-cell:hover { background: rgba(139, 124, 255, 0.2); }
+    .memory-cell.flipped {
+      background: rgba(139, 124, 255, 0.25);
+      transform: scale(1.06);
+    }
+    .memory-cell.matched {
+      background: rgba(47, 226, 170, 0.18);
+      border-color: rgba(47, 226, 170, 0.4);
+      cursor: default;
+    }
+    .reaction-zone {
+      width: 100%;
+      height: 180px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 12px;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .reaction-zone.waiting {
+      background: rgba(255, 70, 70, 0.15);
+      border: 1px solid rgba(255, 70, 70, 0.3);
+      color: #ff9e9e;
+    }
+    .reaction-zone.ready {
+      background: rgba(47, 226, 170, 0.2);
+      border: 1px solid rgba(47, 226, 170, 0.5);
+      color: #c6ffee;
+    }
+    .reaction-zone.idle {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .reaction-zone.too-soon {
+      background: rgba(255, 180, 50, 0.15);
+      border: 1px solid rgba(255, 180, 50, 0.3);
+      color: #ffe0a0;
+    }
+    .meme-quote {
+      text-align: center;
+      margin-top: 24px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .meme-quote blockquote {
+      margin: 0;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--muted);
+    }
+    .meme-quote cite {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: rgba(154, 167, 195, 0.6);
+      font-style: normal;
+    }
+
+    /* ── Fullscreen Game Modal ── */
+    .game-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(4, 8, 20, 0.92);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .game-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .game-modal-content {
+      position: relative;
+      width: 92vw;
+      max-width: 640px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px 24px 24px;
+      text-align: center;
+    }
+    .game-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .game-modal-close:hover {
+      background: rgba(68, 217, 255, 0.12);
+      border-color: rgba(68, 217, 255, 0.4);
+    }
+    .game-modal-content h3 {
+      margin: 0 0 6px;
+      font-size: 1.3rem;
+    }
+    .game-modal-content .arcade-sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin: 0 0 16px;
+    }
+    .game-modal-content canvas {
+      display: block;
+      margin: 0 auto 12px;
+      border-radius: 10px;
+      background: #0a0f1e;
+      max-width: 100%;
+    }
+    .game-modal-content .memory-grid {
+      max-width: 360px;
+    }
+    .game-modal-content .memory-cell {
+      font-size: 2rem;
+    }
+    .game-modal-content .arcade-controls {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .game-modal-content .arcade-controls button {
+      padding: 7px 16px;
+      border: 1px solid rgba(68, 217, 255, 0.35);
+      background: rgba(68, 217, 255, 0.1);
+      color: #bff4ff;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .game-modal-content .arcade-controls button:hover {
+      background: rgba(68, 217, 255, 0.22);
+      border-color: rgba(68, 217, 255, 0.6);
+    }
+    .game-modal-content .reaction-zone {
+      height: 240px;
+      font-size: 1.2rem;
+    }
+
+    /* ── Expand Button Style ── */
+    .arcade-card .arcade-controls .btn-expand {
+      border-color: rgba(139, 124, 255, 0.4);
+      background: rgba(139, 124, 255, 0.1);
+      color: #c8bfff;
+    }
+    .arcade-card .arcade-controls .btn-expand:hover {
+      background: rgba(139, 124, 255, 0.22);
+      border-color: rgba(139, 124, 255, 0.65);
+    }
+
+    /* ── Whack-a-Mole ── */
+    .mole-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 260px;
+      margin: 0 auto 12px;
+    }
+    .mole-hole {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      background: rgba(80, 60, 20, 0.15);
+      border-radius: 50%;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.12s, background 0.12s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .mole-hole:hover { background: rgba(80, 60, 20, 0.25); }
+    .mole-hole.mole-up {
+      background: rgba(255, 200, 50, 0.18);
+      border-color: rgba(255, 200, 50, 0.4);
+      transform: scale(1.08);
+    }
+    .mole-hole.mole-whacked {
+      background: rgba(47, 226, 170, 0.2);
+      border-color: rgba(47, 226, 170, 0.5);
+      transform: scale(0.92);
+    }
+    .game-modal-content .mole-grid {
+      max-width: 340px;
+    }
+    .game-modal-content .mole-hole {
+      font-size: 2.4rem;
+    }
+
+    /* ── Tic Tac Toe ── */
+    .ttt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      max-width: 210px;
+      margin: 0 auto 12px;
+    }
+    .ttt-cell {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      background: rgba(68, 217, 255, 0.06);
+      border-radius: 10px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.12s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .ttt-cell:hover { background: rgba(68, 217, 255, 0.14); }
+    .ttt-cell.x-mark { color: #44d9ff; }
+    .ttt-cell.o-mark { color: #ff6baa; }
+    .game-modal-content .ttt-grid {
+      max-width: 300px;
+    }
+    .game-modal-content .ttt-cell {
+      font-size: 2.5rem;
+    }
+
+    /* ── Flappy Bird ── */
+    .game-modal-content .flappy-wrap canvas {
+      max-width: 100%;
+    }
+
+    /* ── Responsive Arcade ── */
+    @media (max-width: 600px) {
+      .arcade-grid {
+        grid-template-columns: 1fr;
+      }
+      .game-modal-content {
+        width: 96vw;
+        padding: 20px 14px 16px;
+        max-height: 95vh;
+      }
+      .game-modal-content .memory-grid {
+        max-width: 90%;
+      }
+      .game-modal-content .mole-grid {
+        max-width: 85%;
+      }
+      .game-modal-content .ttt-grid {
+        max-width: 80%;
+      }
+      .mole-grid {
+        max-width: 220px;
+      }
+      .ttt-grid {
+        max-width: 180px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1460,6 +1822,7 @@
           <a href="#projects">Projects</a>
           <a href="#impact">Impact</a>
           <a href="#talents">Talents</a>
+          <a href="#arcade">Arcade</a>
           <a href="#contact">Contact</a>
         </nav>
         <div class="topbar-tools">
@@ -1477,17 +1840,17 @@
         <button type="button" class="mode-chip" data-mode="builder">Builder</button>
         <button type="button" class="mode-chip" data-mode="technical">Technical</button>
       </div>
-      <span class="eyebrow">Lead AI Software Developer</span>
+      <span class="eyebrow">Lead AI Software Engineer</span>
       <h1 class="hero-name">Matthew Bodenstein</h1>
       <h2 class="hero-headline">AI developer building <span class="hero-typed" id="heroTyped">practical products</span>.</h2>
       <p>
-        I combine AI engineering, full-stack development, and product thinking to ship systems that reduce operational
-        friction, improve decision quality, and create measurable outcomes.
+        I build full products, from AI systems and web platforms to internal tools, and I'm comfortable being the
+        engineer who owns the whole thing from architecture to deployment.
       </p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#projects">View Projects</a>
         <a class="btn" href="#contact">Contact Me</a>
-        <a class="btn" href="Matthew Bodenstein CV_Resume.pdf" target="_blank" rel="noopener noreferrer">View CV</a>
+        <a class="btn" href="Matthew_Bodenstein_Resume.pdf" target="_blank" rel="noopener noreferrer">View CV</a>
       </div>
     </section>
 
@@ -1498,15 +1861,13 @@
             <h2>Who I am</h2>
           </div>
           <p>
-            Lead AI Software Developer and Full-Stack Software Engineer focused on practical systems that ship fast and create measurable impact.
+            I'm a Toronto-based engineer who likes building things from scratch and seeing them used. I've been the sole engineer at a startup that grew to 1,000+ users, and I run my own consultancy shipping products for clients.
           </p>
           <p>
-            I am a Toronto-based developer and product builder focused on AI systems, web apps, VR experiences, and automation.
-            I care about shipping products that feel intuitive, move fast, and deliver real business impact.
+            Most of my work sits at the intersection of AI and web: LLM-powered workflows, React frontends, Node.js backends, and cloud infrastructure. I also build VR experiences and do research-adjacent software work.
           </p>
           <p>
-            Specialties include LLM-powered workflows, modern React interfaces, and backend systems with clear architecture,
-            observability, and production-ready execution.
+            I do my best work on small teams where there's real ownership and the work matters.
           </p>
         </article>
         <aside class="meta-grid">
@@ -1514,20 +1875,20 @@
             <img class="profile-photo" src="img/about-img.jpg" alt="Matthew Bodenstein profile photo" onerror="this.style.display='none';">
           </div>
           <div class="mini">
-            <h3>Lead AI Software Developer</h3>
-            <p>Maxim Mechanical Group Inc. (Contract) - building internal AI-integrated operations platforms.</p>
+            <h3>Lead AI Software Engineer</h3>
+            <p>Maxim Mechanical Group Inc. (Contract) - designing and building the company's field operations and safety management platform.</p>
           </div>
           <div class="mini">
-            <h3>Founder &amp; Software Engineer</h3>
-            <p>VUNO Digital Solutions (Self-Employed) - delivering full-stack client products and automation workflows.</p>
+            <h3>Founder &amp; Principal Engineer</h3>
+            <p>VUNO Digital Solutions (Sole Proprietor) - building full-stack web apps, dashboards, and AI automation tools for multiple clients.</p>
           </div>
           <div class="mini">
             <h3>Full-Stack Software Engineer</h3>
-            <p>CarGenie.co (Contract) - built a GPT-4o vehicle recommendation platform and admin dashboard.</p>
+            <p>CarGenie.co (Contract) - sole engineer on the full platform build, growing to 1,000+ registered users.</p>
           </div>
           <div class="mini">
             <h3>Research Assistant (Unity Developer)</h3>
-            <p>York University Sensorimotor Control Lab - built VR cognitive systems used by 500+ participants.</p>
+            <p>York University Sensorimotor Control Lab - built VR cognitive training applications used by 500+ research participants.</p>
           </div>
         </aside>
       </div>
@@ -1536,43 +1897,38 @@
     <section id="experience" class="container reveal">
       <div class="section-head">
         <h2>Work Experience</h2>
-        <p>Roles, scope, and timeline from recent experience.</p>
+        <p>From founding my own company to contract engineering and research.</p>
       </div>
       <div class="timeline">
         <article class="timeline-item">
-          <h3 class="timeline-role">Lead AI Software Developer</h3>
-          <p class="timeline-meta">Maxim Mechanical Group Inc. (Contract) — Bradford, ON (Hybrid)</p>
+          <h3 class="timeline-role">Lead AI Software Engineer</h3>
+          <p class="timeline-meta">Maxim Mechanical Group Inc. (Contract) · Bradford, ON (Hybrid)</p>
           <span class="timeline-date">Feb 2026 - Present</span>
         </article>
         <article class="timeline-item">
-          <h3 class="timeline-role">Founder &amp; Software Engineer</h3>
-          <p class="timeline-meta">VUNO Digital Solutions (Self-Employed) — Toronto, ON</p>
+          <h3 class="timeline-role">Founder &amp; Principal Engineer</h3>
+          <p class="timeline-meta">VUNO Digital Solutions (Sole Proprietor) · Toronto, ON</p>
           <span class="timeline-date">Dec 2025 - Present</span>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Full-Stack Software Engineer</h3>
-          <p class="timeline-meta">CarGenie.co (Contract) — Toronto, ON (Hybrid)</p>
+          <p class="timeline-meta">CarGenie.co (Contract) · Toronto, ON (Hybrid)</p>
           <span class="timeline-date">May 2025 - Feb 2026</span>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Research Assistant (Unity Developer)</h3>
-          <p class="timeline-meta">York University Sensorimotor Control Lab (Part-Time Contract) — Toronto, ON (Remote)</p>
+          <p class="timeline-meta">York University Sensorimotor Control Lab (Part-Time Contract) · Toronto, ON (Remote)</p>
           <span class="timeline-date">Jun 2024 - Aug 2025</span>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Software Developer</h3>
-          <p class="timeline-meta">Ontario Government, Enterprise Architecture Office (Internship) — Toronto, ON</p>
+          <p class="timeline-meta">Ontario Government, Enterprise Architecture Office (Internship) · Toronto, ON</p>
           <span class="timeline-date">Jan 2024 - Jan 2025</span>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Research Assistant (Software Developer)</h3>
-          <p class="timeline-meta">Lassonde School of Engineering, Dept. of Earth &amp; Space Science (Part-Time) — Toronto, ON (Remote)</p>
+          <p class="timeline-meta">Lassonde School of Engineering, Dept. of Earth &amp; Space Science (Part-Time) · Toronto, ON (Remote)</p>
           <span class="timeline-date">Aug 2023 - Apr 2024</span>
-        </article>
-        <article class="timeline-item">
-          <h3 class="timeline-role">IT Technician</h3>
-          <p class="timeline-meta">Litens Automotive Partnership (Internship) — Vaughan, ON</p>
-          <span class="timeline-date">Jan 2023 - Apr 2023</span>
         </article>
       </div>
     </section>
@@ -1580,7 +1936,7 @@
     <section id="projects" class="container reveal">
       <div class="section-head">
         <h2>Featured Projects</h2>
-        <p>Each project is framed as a product outcome with clear technical execution and business value.</p>
+        <p>Shipped work across AI, VR, and full-stack, each one built and delivered end-to-end.</p>
       </div>
       <div class="project-filters" role="group" aria-label="Filter projects">
         <button type="button" class="filter-chip is-active" data-filter="all">All</button>
@@ -1687,23 +2043,23 @@
     <section id="impact" class="container reveal">
       <div class="section-head">
         <h2>Experience &amp; Impact</h2>
-        <a class="btn impact-resume-btn" href="Matthew Bodenstein CV_Resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
+        <a class="btn impact-resume-btn" href="Matthew_Bodenstein_Resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
       </div>
       <div class="impact-grid">
         <article class="impact">
-          <h3>Built AI system for internal operations</h3>
-          <p>Led architecture and development of Maxim's internal AI-integrated platform across field and office workflows.</p>
-          <span class="metric">30+ end users coordinated</span>
+          <h3>Built field operations &amp; safety AI platform</h3>
+          <p>Designed a Health &amp; Safety AI module with state-machine workflows and human-in-the-loop review gates, cutting manual safety reporting cycles by 40%.</p>
+          <span class="metric">30+ stakeholders coordinated</span>
         </article>
         <article class="impact">
           <h3>Developed GPT car recommendation engine</h3>
-          <p>Architected and deployed a GPT-4o-powered platform with TypeScript, Node.js, PostgreSQL, and an analytics-enabled admin dashboard.</p>
-          <span class="metric">Production full-stack deployment</span>
+          <p>Sole engineer on the full platform build: architected a GPT-4o-powered recommendation engine with TypeScript, Node.js, and PostgreSQL.</p>
+          <span class="metric">1,000+ registered users</span>
         </article>
         <article class="impact">
           <h3>Created VR applications for research</h3>
-          <p>Built Unity-based VR cognitive training systems and refined calibration tooling with interdisciplinary research teams.</p>
-          <span class="metric">500+ participants impacted</span>
+          <p>Built VR cognitive training applications alongside full-time studies; co-designed calibration tooling with neuroscience researchers.</p>
+          <span class="metric">500+ research participants</span>
         </article>
       </div>
     </section>
@@ -1711,14 +2067,14 @@
     <section id="talents" class="container reveal">
       <div class="section-head">
         <h2>Core Strengths</h2>
-        <p>Technical depth with product-minded execution across AI, web, and immersive systems.</p>
+        <p>What I'm strongest at and the tools I reach for most.</p>
       </div>
       <div class="skills-wrap">
         <article class="skills-col">
           <h3>AI Engineering</h3>
           <div class="pills">
-            <span class="pill">OpenAI APIs</span><span class="pill">LLM Workflows</span><span class="pill">Prompt Engineering</span>
-            <span class="pill">AI Automation</span><span class="pill">Human-in-the-loop Systems</span>
+            <span class="pill">Claude API</span><span class="pill">OpenAI APIs</span><span class="pill">LLM Workflows</span><span class="pill">Prompt Engineering</span>
+            <span class="pill">RAG Pipelines</span><span class="pill">Human-in-the-loop Systems</span>
           </div>
         </article>
         <article class="skills-col">
@@ -1732,39 +2088,119 @@
           <h3>Backend &amp; Platform</h3>
           <div class="pills">
             <span class="pill">Node.js</span><span class="pill">Express</span><span class="pill">REST APIs</span>
-            <span class="pill">PostgreSQL</span><span class="pill">Supabase</span><span class="pill">Cloud Integration</span>
+            <span class="pill">PostgreSQL</span><span class="pill">NeonDB</span><span class="pill">Supabase</span><span class="pill">Azure</span><span class="pill">AWS</span>
           </div>
         </article>
         <article class="skills-col">
-          <h3>Leadership &amp; Delivery</h3>
+          <h3>Ownership &amp; Delivery</h3>
           <div class="pills">
-            <span class="pill">Agile/Scrum</span><span class="pill">Stakeholder Alignment</span><span class="pill">Requirements Discovery</span>
-            <span class="pill">End-to-End Delivery</span><span class="pill">Team Collaboration</span>
+            <span class="pill">Full Product Ownership</span><span class="pill">Small-Team Engineering</span><span class="pill">Rapid Prototyping</span>
+            <span class="pill">End-to-End Delivery</span><span class="pill">Stakeholder Management</span>
           </div>
         </article>
       </div>
       <div class="talent-strengths">
         <article class="strength-card">
-          <h4>Take ambiguous requirements to production</h4>
-          <p>Turn unclear problems into reliable systems with practical UX and clear implementation plans.</p>
+          <h4>Comfortable building from scratch</h4>
+          <p>Give me a problem and I'll figure out the architecture, build it, and get it in front of users.</p>
         </article>
         <article class="strength-card">
-          <h4>Align AI strategy with execution</h4>
-          <p>Build AI features that are technically sound, usable in practice, and valuable for operations.</p>
+          <h4>Happy wearing every hat</h4>
+          <p>Frontend, backend, infra, AI. I've been the only engineer on products with real users.</p>
         </article>
         <article class="strength-card">
-          <h4>Own delivery across product and engineering</h4>
-          <p>Coordinate technical build, priorities, and stakeholder communication to hit timelines and outcomes.</p>
+          <h4>I care about the product</h4>
+          <p>Not just writing code that works, but building something people actually want to use.</p>
         </article>
       </div>
     </section>
 
+    <section id="arcade" class="container reveal">
+      <div class="section-head">
+        <h2>Arcade</h2>
+        <p>Take a break. Play something dumb.</p>
+      </div>
+      <div class="arcade-grid">
+        <div class="arcade-card">
+          <h3>Snake</h3>
+          <p class="arcade-sub">Arrow keys or swipe. Don't hit yourself.</p>
+          <canvas id="snakeCanvas" width="280" height="280"></canvas>
+          <p class="arcade-score" id="snakeScore"></p>
+          <div class="arcade-controls">
+            <button type="button" id="snakeStart">Start</button>
+            <button type="button" class="btn-expand" onclick="openGameModal('snake')">Expand</button>
+          </div>
+        </div>
+        <div class="arcade-card">
+          <h3>Memory Match</h3>
+          <p class="arcade-sub">Find all 8 pairs. Try not to embarrass yourself.</p>
+          <div class="memory-grid" id="memoryGrid"></div>
+          <p class="arcade-score" id="memoryScore"></p>
+          <div class="arcade-controls">
+            <button type="button" id="memoryReset">New Game</button>
+            <button type="button" class="btn-expand" onclick="openGameModal('memory')">Expand</button>
+          </div>
+        </div>
+        <div class="arcade-card">
+          <h3>Reaction Time</h3>
+          <p class="arcade-sub">Wait for green, then click. Blink and you lose.</p>
+          <div class="reaction-zone idle" id="reactionZone">Click to start</div>
+          <p class="arcade-score" id="reactionScore"></p>
+          <div class="arcade-controls">
+            <button type="button" class="btn-expand" onclick="openGameModal('reaction')">Expand</button>
+          </div>
+        </div>
+        <div class="arcade-card">
+          <h3>Flappy Bird</h3>
+          <p class="arcade-sub">Click, tap, or spacebar to flap. Dodge the pipes.</p>
+          <canvas id="flappyCanvas" width="280" height="200"></canvas>
+          <p class="arcade-score" id="flappyScore"></p>
+          <div class="arcade-controls">
+            <button type="button" id="flappyStart">Start</button>
+            <button type="button" class="btn-expand" onclick="openGameModal('flappy')">Expand</button>
+          </div>
+        </div>
+        <div class="arcade-card">
+          <h3>Whack-a-Mole</h3>
+          <p class="arcade-sub">Smack the moles. 30 seconds. Go wild.</p>
+          <div class="mole-grid" id="moleGrid"></div>
+          <p class="arcade-score" id="moleScore"></p>
+          <div class="arcade-controls">
+            <button type="button" id="moleStart">Start</button>
+            <button type="button" class="btn-expand" onclick="openGameModal('mole')">Expand</button>
+          </div>
+        </div>
+        <div class="arcade-card">
+          <h3>Tic Tac Toe</h3>
+          <p class="arcade-sub">You're X. Beat the AI. It's not that smart.</p>
+          <div class="ttt-grid" id="tttGrid"></div>
+          <p class="arcade-score" id="tttScore"></p>
+          <div class="arcade-controls">
+            <button type="button" id="tttReset">New Game</button>
+            <button type="button" class="btn-expand" onclick="openGameModal('ttt')">Expand</button>
+          </div>
+        </div>
+      </div>
+      <div class="meme-quote" id="memeQuote">
+        <blockquote id="memeText"></blockquote>
+        <cite id="memeAuthor"></cite>
+      </div>
+    </section>
+
+    <!-- Fullscreen Game Modal -->
+    <div class="game-modal-overlay" id="gameModalOverlay">
+      <div class="game-modal-content" id="gameModalContent">
+        <button class="game-modal-close" id="gameModalClose" type="button" aria-label="Close">&times;</button>
+        <div id="gameModalBody"></div>
+      </div>
+    </div>
+
     <section id="contact" class="container reveal">
       <article class="contact">
-        <span class="eyebrow">Open to Collaborations</span>
-        <h2>Interested in working together?</h2>
+        <span class="eyebrow">Open to Opportunities</span>
+        <h2>Let's build something together</h2>
         <p>
-          I work with teams who need practical AI systems, premium frontend execution, and product velocity from idea to release.
+          I'm looking for a team where I can own real problems, build alongside smart people, and work on products that actually get used.
         </p>
         <div class="contact-links">
           <a class="btn btn-primary" href="mailto:m.bodenstein@outlook.com">Email Me</a>
@@ -1826,7 +2262,7 @@
         <button type="button" class="ask-chip" data-ask="contact">Contact?</button>
         <button type="button" class="ask-chip" data-ask="hire">Hiring?</button>
       </div>
-      <p id="askAnswer">Pick a question — predefined answers, no API required.</p>
+      <p id="askAnswer">Pick a question. Predefined answers, no API required.</p>
     </div>
   </div>
 
@@ -1851,7 +2287,7 @@
         "@type": "Person",
         "@id": "https://matthewboden.github.io/#person",
         "name": "Matthew Bodenstein",
-        "jobTitle": "Lead AI Software Developer",
+        "jobTitle": "Lead AI Software Engineer",
         "url": "https://matthewboden.github.io/",
         "image": "https://matthewboden.github.io/img/about-img.jpg",
         "sameAs": [
@@ -1864,8 +2300,8 @@
           "TypeScript",
           "Node.js",
           "LLM Workflows",
-          "VR Development",
-          "Automation Systems"
+          "Full-Stack Engineering",
+          "VR Development"
         ]
       },
       {
@@ -2346,14 +2782,14 @@
 
     function applyAudienceMode(mode) {
       var titleMap = {
-        recruiter: "Matthew Bodenstein | Lead AI Software Developer",
+        recruiter: "Matthew Bodenstein | Lead AI Software Engineer",
         builder: "Matthew Bodenstein | AI & Full-Stack Product Builder",
         technical: "Matthew Bodenstein | AI, Full-Stack, and VR Engineer"
       };
       var descriptionMap = {
-        recruiter: "Lead AI Software Developer with shipped full-stack, AI automation, and VR systems across Maxim, VUNO, and CarGenie.",
-        builder: "Builds practical AI-enabled web products, automation workflows, and modern user-facing software from design through deployment.",
-        technical: "React, TypeScript, Node.js, AI integrations, VR development, cloud deployment, and product-focused engineering."
+        recruiter: "AI and full-stack engineer with shipped products at Maxim, CarGenie, and VUNO. Comfortable owning entire builds from architecture to deployment.",
+        builder: "Builds AI-powered web products, dashboards, and automation tools. Full-stack delivery from design through deployment.",
+        technical: "React, TypeScript, Node.js, Claude/OpenAI APIs, PostgreSQL, Supabase, Unity. Production systems across AI, web, and VR."
       };
       var headlinePrefix = {
         recruiter: "AI developer building",
@@ -2469,6 +2905,812 @@
         });
       });
     }
+  </script>
+  <script>
+  (function() {
+    // ── Meme quotes ──
+    var MEMES = [
+      { text: "It works on my machine.", author: "Every developer ever" },
+      { text: "99 little bugs in the code, 99 little bugs. Take one down, patch it around, 127 little bugs in the code.", author: "Ancient proverb" },
+      { text: "There are only two hard things in computer science: cache invalidation, naming things, and off-by-one errors.", author: "Phil Karlton (extended)" },
+      { text: "The best error message is the one that never shows up.", author: "Thomas Fuchs" },
+      { text: "A user interface is like a joke. If you have to explain it, it's not that good.", author: "Martin LeBlanc" },
+      { text: "Deleted code is debugged code.", author: "Jeff Sickel" },
+      { text: "It's not a bug, it's an undocumented feature.", author: "Anonymous" },
+      { text: "The first 90% of the code accounts for the first 90% of the development time. The remaining 10% accounts for the other 90%.", author: "Tom Cargill" },
+      { text: "Always code as if the person who ends up maintaining your code will be a violent psychopath who knows where you live.", author: "John Woods" },
+      { text: "Works on my machine. Ship the machine.", author: "Senior engineer energy" },
+      { text: "// TODO: fix this later\n// Added 3 years ago", author: "git blame" },
+      { text: "sudo make me a sandwich", author: "xkcd 149" },
+      { text: "Stackoverflow: closed as duplicate of a question with 0 answers.", author: "Pain" },
+      { text: "My code doesn't have bugs. It just develops random features.", author: "Anonymous" }
+    ];
+    var meme = MEMES[Math.floor(Math.random() * MEMES.length)];
+    var memeText = document.getElementById("memeText");
+    var memeAuthor = document.getElementById("memeAuthor");
+    if (memeText) memeText.textContent = '"' + meme.text + '"';
+    if (memeAuthor) memeAuthor.textContent = "- " + meme.author;
+
+    // ══════════════════════════════════════════
+    // FULLSCREEN GAME MODAL SYSTEM
+    // ══════════════════════════════════════════
+    var modalOverlay = document.getElementById("gameModalOverlay");
+    var modalBody = document.getElementById("gameModalBody");
+    var modalClose = document.getElementById("gameModalClose");
+    var currentModalGame = null;
+    var modalCleanup = null;
+
+    window.openGameModal = function(gameId) {
+      currentModalGame = gameId;
+      modalBody.innerHTML = "";
+      modalOverlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+      initGameInModal(gameId, modalBody);
+    };
+
+    function closeGameModal() {
+      modalOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+      if (modalCleanup) { modalCleanup(); modalCleanup = null; }
+      currentModalGame = null;
+      setTimeout(function() { modalBody.innerHTML = ""; }, 250);
+    }
+
+    modalClose.addEventListener("click", closeGameModal);
+    modalOverlay.addEventListener("click", function(e) {
+      if (e.target === modalOverlay) closeGameModal();
+    });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && currentModalGame) closeGameModal();
+    });
+
+    function initGameInModal(gameId, container) {
+      switch (gameId) {
+        case "snake": initSnakeGame(container, 400); break;
+        case "memory": initMemoryGame(container, true); break;
+        case "reaction": initReactionGame(container); break;
+        case "flappy": initFlappyGame(container, 480, 320); break;
+        case "mole": initMoleGame(container, true); break;
+        case "ttt": initTTTGame(container, true); break;
+      }
+    }
+
+    // ══════════════════════════════════════════
+    // SNAKE GAME
+    // ══════════════════════════════════════════
+    function initSnakeGame(container, canvasSize) {
+      var canvas, ctx, size, cols, rows, snake, dir, food, score, running, interval;
+      var scoreEl;
+
+      if (container) {
+        canvas = document.createElement("canvas");
+        canvas.width = canvasSize;
+        canvas.height = canvasSize;
+        canvas.style.maxWidth = "100%";
+        canvas.style.borderRadius = "10px";
+        canvas.style.background = "#0a0f1e";
+        canvas.style.display = "block";
+        canvas.style.margin = "0 auto 12px";
+        container.innerHTML = "<h3>Snake</h3><p class='arcade-sub'>Arrow keys or swipe. Don't hit yourself.</p>";
+        container.appendChild(canvas);
+        scoreEl = document.createElement("p");
+        scoreEl.className = "arcade-score";
+        container.appendChild(scoreEl);
+        var controls = document.createElement("div");
+        controls.className = "arcade-controls";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "Start";
+        btn.addEventListener("click", startGame);
+        controls.appendChild(btn);
+        container.appendChild(controls);
+      } else {
+        canvas = document.getElementById("snakeCanvas");
+        if (!canvas) return;
+        scoreEl = document.getElementById("snakeScore");
+      }
+
+      ctx = canvas.getContext("2d");
+      size = Math.floor(canvas.width / 14);
+      cols = Math.floor(canvas.width / size);
+      rows = Math.floor(canvas.height / size);
+
+      function reset() {
+        snake = [{ x: Math.floor(cols / 2), y: Math.floor(rows / 2) }];
+        dir = { x: 1, y: 0 };
+        score = 0;
+        placeFood();
+        draw();
+        if (scoreEl) scoreEl.textContent = "";
+      }
+
+      function placeFood() {
+        do {
+          food = { x: Math.floor(Math.random() * cols), y: Math.floor(Math.random() * rows) };
+        } while (snake.some(function(s) { return s.x === food.x && s.y === food.y; }));
+      }
+
+      function draw() {
+        ctx.fillStyle = "#0a0f1e";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#2fe2aa";
+        snake.forEach(function(s) {
+          ctx.beginPath();
+          ctx.roundRect(s.x * size + 1, s.y * size + 1, size - 2, size - 2, 4);
+          ctx.fill();
+        });
+        ctx.fillStyle = "#ff6b6b";
+        ctx.beginPath();
+        ctx.arc(food.x * size + size / 2, food.y * size + size / 2, size / 2 - 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function tick() {
+        var head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+        if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows ||
+            snake.some(function(s) { return s.x === head.x && s.y === head.y; })) {
+          clearInterval(interval);
+          running = false;
+          if (scoreEl) scoreEl.textContent = "Game over! Score: " + score;
+          return;
+        }
+        snake.unshift(head);
+        if (head.x === food.x && head.y === food.y) {
+          score++;
+          placeFood();
+        } else {
+          snake.pop();
+        }
+        draw();
+        if (scoreEl) scoreEl.textContent = "Score: " + score;
+      }
+
+      function startGame() {
+        if (running) { clearInterval(interval); }
+        running = true;
+        reset();
+        interval = setInterval(tick, 110);
+      }
+
+      if (!container) {
+        document.getElementById("snakeStart").addEventListener("click", startGame);
+      }
+
+      var keyHandler = function(e) {
+        if (!running) return;
+        var map = { ArrowUp: {x:0,y:-1}, ArrowDown: {x:0,y:1}, ArrowLeft: {x:-1,y:0}, ArrowRight: {x:1,y:0} };
+        var d = map[e.key];
+        if (d && !(d.x === -dir.x && d.y === -dir.y)) { dir = d; e.preventDefault(); }
+      };
+      document.addEventListener("keydown", keyHandler);
+
+      var touchStart = null;
+      canvas.addEventListener("touchstart", function(e) {
+        var t = e.touches[0];
+        touchStart = { x: t.clientX, y: t.clientY };
+      }, { passive: true });
+      canvas.addEventListener("touchend", function(e) {
+        if (!touchStart || !running) return;
+        var t = e.changedTouches[0];
+        var dx = t.clientX - touchStart.x;
+        var dy = t.clientY - touchStart.y;
+        if (Math.abs(dx) > Math.abs(dy)) {
+          var d = dx > 0 ? {x:1,y:0} : {x:-1,y:0};
+        } else {
+          var d = dy > 0 ? {x:0,y:1} : {x:0,y:-1};
+        }
+        if (!(d.x === -dir.x && d.y === -dir.y)) dir = d;
+        touchStart = null;
+      });
+
+      reset();
+
+      if (container) {
+        modalCleanup = function() {
+          clearInterval(interval);
+          running = false;
+          document.removeEventListener("keydown", keyHandler);
+        };
+      }
+    }
+    initSnakeGame(null, 280);
+
+    // ══════════════════════════════════════════
+    // MEMORY MATCH GAME
+    // ══════════════════════════════════════════
+    function initMemoryGame(container, isModal) {
+      var grid, scoreEl;
+      var ICONS = ["\u{1F40D}", "\u{1F916}", "\u{1F680}", "\u{1F525}", "\u{1F4BB}", "\u{1F3AE}", "\u{1F9E0}", "\u2615"];
+      var cards, flipped, matched, moves, locked;
+
+      if (container && isModal) {
+        container.innerHTML = "<h3>Memory Match</h3><p class='arcade-sub'>Find all 8 pairs. Try not to embarrass yourself.</p>";
+        grid = document.createElement("div");
+        grid.className = "memory-grid";
+        container.appendChild(grid);
+        scoreEl = document.createElement("p");
+        scoreEl.className = "arcade-score";
+        container.appendChild(scoreEl);
+        var controls = document.createElement("div");
+        controls.className = "arcade-controls";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "New Game";
+        btn.addEventListener("click", init);
+        controls.appendChild(btn);
+        container.appendChild(controls);
+      } else {
+        grid = document.getElementById("memoryGrid");
+        if (!grid) return;
+        scoreEl = document.getElementById("memoryScore");
+      }
+
+      function shuffle(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+        }
+        return arr;
+      }
+
+      function init() {
+        grid.innerHTML = "";
+        cards = shuffle(ICONS.concat(ICONS).slice());
+        flipped = [];
+        matched = 0;
+        moves = 0;
+        locked = false;
+        if (scoreEl) scoreEl.textContent = "";
+        cards.forEach(function(icon, i) {
+          var cell = document.createElement("div");
+          cell.className = "memory-cell";
+          cell.setAttribute("data-idx", i);
+          cell.textContent = "";
+          cell.addEventListener("click", function() { flipCard(cell, i); });
+          grid.appendChild(cell);
+        });
+      }
+
+      function flipCard(cell, idx) {
+        if (locked || cell.classList.contains("flipped") || cell.classList.contains("matched")) return;
+        cell.classList.add("flipped");
+        cell.textContent = cards[idx];
+        flipped.push({ cell: cell, idx: idx });
+        if (flipped.length === 2) {
+          moves++;
+          locked = true;
+          var a = flipped[0], b = flipped[1];
+          if (cards[a.idx] === cards[b.idx]) {
+            a.cell.classList.add("matched");
+            b.cell.classList.add("matched");
+            matched += 2;
+            flipped = [];
+            locked = false;
+            if (matched === cards.length) {
+              if (scoreEl) scoreEl.textContent = "Done in " + moves + " moves!";
+            }
+          } else {
+            setTimeout(function() {
+              a.cell.classList.remove("flipped");
+              a.cell.textContent = "";
+              b.cell.classList.remove("flipped");
+              b.cell.textContent = "";
+              flipped = [];
+              locked = false;
+            }, 600);
+          }
+        }
+      }
+
+      if (!container || !isModal) {
+        document.getElementById("memoryReset").addEventListener("click", init);
+      }
+      init();
+
+      if (container && isModal) {
+        modalCleanup = function() {};
+      }
+    }
+    initMemoryGame(null, false);
+
+    // ══════════════════════════════════════════
+    // REACTION TIME GAME
+    // ══════════════════════════════════════════
+    function initReactionGame(container) {
+      var zone, scoreEl;
+      var state = "idle";
+      var timeout, startTime;
+      var bestTime = Infinity;
+
+      if (container) {
+        container.innerHTML = "<h3>Reaction Time</h3><p class='arcade-sub'>Wait for green, then click. Blink and you lose.</p>";
+        zone = document.createElement("div");
+        zone.className = "reaction-zone idle";
+        zone.textContent = "Click to start";
+        container.appendChild(zone);
+        scoreEl = document.createElement("p");
+        scoreEl.className = "arcade-score";
+        container.appendChild(scoreEl);
+      } else {
+        zone = document.getElementById("reactionZone");
+        if (!zone) return;
+        scoreEl = document.getElementById("reactionScore");
+      }
+
+      zone.addEventListener("click", function() {
+        if (state === "idle") {
+          state = "waiting";
+          zone.className = "reaction-zone waiting";
+          zone.textContent = "Wait for green...";
+          timeout = setTimeout(function() {
+            state = "ready";
+            zone.className = "reaction-zone ready";
+            zone.textContent = "CLICK NOW!";
+            startTime = performance.now();
+          }, 1500 + Math.random() * 3000);
+        } else if (state === "waiting") {
+          clearTimeout(timeout);
+          state = "idle";
+          zone.className = "reaction-zone too-soon";
+          zone.textContent = "Too soon! Click to retry.";
+          setTimeout(function() {
+            zone.className = "reaction-zone idle";
+            zone.textContent = "Click to start";
+            state = "idle";
+          }, 1200);
+        } else if (state === "ready") {
+          var ms = Math.round(performance.now() - startTime);
+          if (ms < bestTime) bestTime = ms;
+          state = "idle";
+          zone.className = "reaction-zone idle";
+          zone.textContent = ms + "ms! Click to go again.";
+          if (scoreEl) {
+            var msg = "Last: " + ms + "ms";
+            if (bestTime < Infinity) msg += " | Best: " + bestTime + "ms";
+            if (ms < 200) msg += " | Inhuman.";
+            else if (ms < 250) msg += " | Cracked.";
+            else if (ms < 350) msg += " | Not bad.";
+            else msg += " | Were you asleep?";
+            scoreEl.textContent = msg;
+          }
+        }
+      });
+
+      if (container) {
+        modalCleanup = function() { clearTimeout(timeout); };
+      }
+    }
+    initReactionGame(null);
+
+    // ══════════════════════════════════════════
+    // FLAPPY BIRD GAME
+    // ══════════════════════════════════════════
+    function initFlappyGame(container, cw, ch) {
+      var canvas, ctx, scoreEl;
+      var bird, pipes, score, running, animFrame, gravity, flapPower, pipeSpeed, pipeGap, pipeWidth, frameCount;
+
+      if (container) {
+        container.innerHTML = "<h3>Flappy Bird</h3><p class='arcade-sub'>Click, tap, or spacebar to flap. Dodge the pipes.</p>";
+        canvas = document.createElement("canvas");
+        canvas.width = cw || 480;
+        canvas.height = ch || 320;
+        canvas.style.maxWidth = "100%";
+        canvas.style.borderRadius = "10px";
+        canvas.style.background = "#0a0f1e";
+        canvas.style.display = "block";
+        canvas.style.margin = "0 auto 12px";
+        container.appendChild(canvas);
+        scoreEl = document.createElement("p");
+        scoreEl.className = "arcade-score";
+        container.appendChild(scoreEl);
+        var controls = document.createElement("div");
+        controls.className = "arcade-controls";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "Start";
+        btn.addEventListener("click", startGame);
+        controls.appendChild(btn);
+        container.appendChild(controls);
+      } else {
+        canvas = document.getElementById("flappyCanvas");
+        if (!canvas) return;
+        scoreEl = document.getElementById("flappyScore");
+        document.getElementById("flappyStart").addEventListener("click", startGame);
+      }
+
+      ctx = canvas.getContext("2d");
+      gravity = 0.4;
+      flapPower = -6;
+      pipeSpeed = 2.5;
+      pipeGap = canvas.height * 0.32;
+      pipeWidth = 40;
+
+      function reset() {
+        bird = { x: canvas.width * 0.2, y: canvas.height / 2, vy: 0, size: 14 };
+        pipes = [];
+        score = 0;
+        frameCount = 0;
+        running = false;
+        drawFrame();
+        if (scoreEl) scoreEl.textContent = "";
+      }
+
+      function flap() {
+        if (!running) return;
+        bird.vy = flapPower;
+      }
+
+      function addPipe() {
+        var minTop = 40;
+        var maxTop = canvas.height - pipeGap - 40;
+        var topH = minTop + Math.random() * (maxTop - minTop);
+        pipes.push({ x: canvas.width, topH: topH, scored: false });
+      }
+
+      function drawFrame() {
+        ctx.fillStyle = "#0a0f1e";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#2d7a4f";
+        pipes.forEach(function(p) {
+          ctx.fillRect(p.x, 0, pipeWidth, p.topH);
+          ctx.fillRect(p.x, p.topH + pipeGap, pipeWidth, canvas.height - p.topH - pipeGap);
+          ctx.fillStyle = "#3a9963";
+          ctx.fillRect(p.x - 3, p.topH - 16, pipeWidth + 6, 16);
+          ctx.fillRect(p.x - 3, p.topH + pipeGap, pipeWidth + 6, 16);
+          ctx.fillStyle = "#2d7a4f";
+        });
+
+        ctx.fillStyle = "#ffcc00";
+        ctx.beginPath();
+        ctx.arc(bird.x, bird.y, bird.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#fff";
+        ctx.beginPath();
+        ctx.arc(bird.x + 5, bird.y - 3, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(bird.x + 6, bird.y - 3, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 18px monospace";
+        ctx.textAlign = "left";
+        ctx.fillText("Score: " + score, 10, 24);
+      }
+
+      function tick() {
+        if (!running) return;
+        frameCount++;
+        bird.vy += gravity;
+        bird.y += bird.vy;
+
+        if (frameCount % 90 === 0) addPipe();
+
+        for (var i = pipes.length - 1; i >= 0; i--) {
+          pipes[i].x -= pipeSpeed;
+          if (pipes[i].x + pipeWidth < 0) {
+            pipes.splice(i, 1);
+            continue;
+          }
+          if (!pipes[i].scored && pipes[i].x + pipeWidth < bird.x) {
+            pipes[i].scored = true;
+            score++;
+          }
+          if (bird.x + bird.size > pipes[i].x && bird.x - bird.size < pipes[i].x + pipeWidth) {
+            if (bird.y - bird.size < pipes[i].topH || bird.y + bird.size > pipes[i].topH + pipeGap) {
+              gameOver();
+              return;
+            }
+          }
+        }
+
+        if (bird.y + bird.size > canvas.height || bird.y - bird.size < 0) {
+          gameOver();
+          return;
+        }
+
+        drawFrame();
+        animFrame = requestAnimationFrame(tick);
+      }
+
+      function gameOver() {
+        running = false;
+        if (scoreEl) scoreEl.textContent = "Game over! Score: " + score;
+        drawFrame();
+        ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ff6b6b";
+        ctx.font = "bold 22px monospace";
+        ctx.textAlign = "center";
+        ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+      }
+
+      function startGame() {
+        if (running) { cancelAnimationFrame(animFrame); }
+        reset();
+        running = true;
+        if (scoreEl) scoreEl.textContent = "Score: 0";
+        animFrame = requestAnimationFrame(tick);
+      }
+
+      var keyHandler = function(e) {
+        if (e.key === " " || e.code === "Space") { flap(); e.preventDefault(); }
+      };
+      document.addEventListener("keydown", keyHandler);
+      canvas.addEventListener("click", flap);
+      canvas.addEventListener("touchstart", function(e) { flap(); e.preventDefault(); });
+
+      reset();
+
+      if (container) {
+        modalCleanup = function() {
+          running = false;
+          cancelAnimationFrame(animFrame);
+          document.removeEventListener("keydown", keyHandler);
+        };
+      }
+    }
+    initFlappyGame(null, 280, 200);
+
+    // ══════════════════════════════════════════
+    // WHACK-A-MOLE GAME
+    // ══════════════════════════════════════════
+    function initMoleGame(container, isModal) {
+      var grid, scoreEl;
+      var score, timeLeft, running, moleTimers, gameTimer, countdownTimer;
+      var ROUND_TIME = 30;
+
+      if (container && isModal) {
+        container.innerHTML = "<h3>Whack-a-Mole</h3><p class='arcade-sub'>Smack the moles. 30 seconds. Go wild.</p>";
+        grid = document.createElement("div");
+        grid.className = "mole-grid";
+        container.appendChild(grid);
+        scoreEl = document.createElement("p");
+        scoreEl.className = "arcade-score";
+        container.appendChild(scoreEl);
+        var controls = document.createElement("div");
+        controls.className = "arcade-controls";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "Start";
+        btn.addEventListener("click", startGame);
+        controls.appendChild(btn);
+        container.appendChild(controls);
+      } else {
+        grid = document.getElementById("moleGrid");
+        if (!grid) return;
+        scoreEl = document.getElementById("moleScore");
+        document.getElementById("moleStart").addEventListener("click", startGame);
+      }
+
+      var holes = [];
+      function buildGrid() {
+        grid.innerHTML = "";
+        holes = [];
+        for (var i = 0; i < 9; i++) {
+          var hole = document.createElement("div");
+          hole.className = "mole-hole";
+          hole.setAttribute("data-idx", i);
+          (function(idx, el) {
+            el.addEventListener("click", function() { whack(idx); });
+          })(i, hole);
+          grid.appendChild(hole);
+          holes.push(hole);
+        }
+      }
+
+      function whack(idx) {
+        if (!running) return;
+        var hole = holes[idx];
+        if (hole.classList.contains("mole-up")) {
+          hole.classList.remove("mole-up");
+          hole.classList.add("mole-whacked");
+          hole.textContent = "";
+          score++;
+          updateDisplay();
+          setTimeout(function() { hole.classList.remove("mole-whacked"); }, 200);
+        }
+      }
+
+      function popMole() {
+        if (!running) return;
+        var available = [];
+        holes.forEach(function(h, i) {
+          if (!h.classList.contains("mole-up")) available.push(i);
+        });
+        if (available.length === 0) return;
+        var idx = available[Math.floor(Math.random() * available.length)];
+        var hole = holes[idx];
+        hole.classList.add("mole-up");
+        hole.textContent = "\u{1F439}";
+        var dur = 700 + Math.random() * 800;
+        var timer = setTimeout(function() {
+          hole.classList.remove("mole-up");
+          hole.textContent = "";
+        }, dur);
+        moleTimers.push(timer);
+      }
+
+      function updateDisplay() {
+        if (scoreEl) scoreEl.textContent = "Score: " + score + " | Time: " + timeLeft + "s";
+      }
+
+      function startGame() {
+        stopGame();
+        score = 0;
+        timeLeft = ROUND_TIME;
+        running = true;
+        moleTimers = [];
+        buildGrid();
+        updateDisplay();
+
+        gameTimer = setInterval(function() {
+          if (!running) return;
+          popMole();
+          if (Math.random() > 0.5) popMole();
+        }, 600);
+
+        countdownTimer = setInterval(function() {
+          timeLeft--;
+          updateDisplay();
+          if (timeLeft <= 0) {
+            stopGame();
+            if (scoreEl) scoreEl.textContent = "Time's up! Final score: " + score;
+          }
+        }, 1000);
+      }
+
+      function stopGame() {
+        running = false;
+        clearInterval(gameTimer);
+        clearInterval(countdownTimer);
+        if (moleTimers) moleTimers.forEach(function(t) { clearTimeout(t); });
+        moleTimers = [];
+      }
+
+      buildGrid();
+
+      if (container && isModal) {
+        modalCleanup = function() { stopGame(); };
+      }
+    }
+    initMoleGame(null, false);
+
+    // ══════════════════════════════════════════
+    // TIC TAC TOE GAME
+    // ══════════════════════════════════════════
+    function initTTTGame(container, isModal) {
+      var grid, scoreEl;
+      var board, gameOver, playerTurn;
+      var WINS = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+
+      if (container && isModal) {
+        container.innerHTML = "<h3>Tic Tac Toe</h3><p class='arcade-sub'>You're X. Beat the AI. It's not that smart.</p>";
+        grid = document.createElement("div");
+        grid.className = "ttt-grid";
+        container.appendChild(grid);
+        scoreEl = document.createElement("p");
+        scoreEl.className = "arcade-score";
+        container.appendChild(scoreEl);
+        var controls = document.createElement("div");
+        controls.className = "arcade-controls";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = "New Game";
+        btn.addEventListener("click", init);
+        controls.appendChild(btn);
+        container.appendChild(controls);
+      } else {
+        grid = document.getElementById("tttGrid");
+        if (!grid) return;
+        scoreEl = document.getElementById("tttScore");
+        document.getElementById("tttReset").addEventListener("click", init);
+      }
+
+      function init() {
+        board = ["","","","","","","","",""];
+        gameOver = false;
+        playerTurn = true;
+        if (scoreEl) scoreEl.textContent = "";
+        renderBoard();
+      }
+
+      function renderBoard() {
+        grid.innerHTML = "";
+        board.forEach(function(val, i) {
+          var cell = document.createElement("div");
+          cell.className = "ttt-cell";
+          if (val === "X") cell.classList.add("x-mark");
+          if (val === "O") cell.classList.add("o-mark");
+          cell.textContent = val;
+          cell.addEventListener("click", function() { playerMove(i); });
+          grid.appendChild(cell);
+        });
+      }
+
+      function playerMove(idx) {
+        if (gameOver || !playerTurn || board[idx] !== "") return;
+        board[idx] = "X";
+        playerTurn = false;
+        renderBoard();
+        var result = checkWin();
+        if (result) { endGame(result); return; }
+        setTimeout(aiMove, 300);
+      }
+
+      function aiMove() {
+        if (gameOver) return;
+        var move = getBestMove();
+        if (move === -1) { endGame("draw"); return; }
+        board[move] = "O";
+        renderBoard();
+        var result = checkWin();
+        if (result) { endGame(result); return; }
+        playerTurn = true;
+      }
+
+      function getBestMove() {
+        var empty = [];
+        board.forEach(function(v, i) { if (v === "") empty.push(i); });
+        if (empty.length === 0) return -1;
+
+        for (var i = 0; i < WINS.length; i++) {
+          var w = WINS[i];
+          var line = [board[w[0]], board[w[1]], board[w[2]]];
+          if (line.filter(function(c){return c==="O";}).length === 2 && line.indexOf("") !== -1) {
+            return w[line.indexOf("")];
+          }
+        }
+        for (var i = 0; i < WINS.length; i++) {
+          var w = WINS[i];
+          var line = [board[w[0]], board[w[1]], board[w[2]]];
+          if (line.filter(function(c){return c==="X";}).length === 2 && line.indexOf("") !== -1) {
+            return w[line.indexOf("")];
+          }
+        }
+        if (board[4] === "") return 4;
+        var corners = [0,2,6,8].filter(function(i){return board[i]==="";});
+        if (corners.length > 0) return corners[Math.floor(Math.random() * corners.length)];
+        return empty[Math.floor(Math.random() * empty.length)];
+      }
+
+      function checkWin() {
+        for (var i = 0; i < WINS.length; i++) {
+          var w = WINS[i];
+          if (board[w[0]] && board[w[0]] === board[w[1]] && board[w[1]] === board[w[2]]) {
+            return board[w[0]];
+          }
+        }
+        if (board.indexOf("") === -1) return "draw";
+        return null;
+      }
+
+      function endGame(result) {
+        gameOver = true;
+        if (result === "X") {
+          if (scoreEl) scoreEl.textContent = "You win! Nice.";
+        } else if (result === "O") {
+          if (scoreEl) scoreEl.textContent = "AI wins. Ouch.";
+        } else {
+          if (scoreEl) scoreEl.textContent = "Draw. Respectable.";
+        }
+      }
+
+      init();
+
+      if (container && isModal) {
+        modalCleanup = function() {};
+      }
+    }
+    initTTTGame(null, false);
+
+  })();
   </script>
 </body>
 </html>

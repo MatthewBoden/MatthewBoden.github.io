@@ -8,25 +8,24 @@
 
   var NAME_TITLES = [
     "Matthew Bodenstein",
-    "Lead AI Software Developer",
-    "Unity + VR Builder",
+    "Lead AI Software Engineer",
     "Full-Stack Product Engineer",
-    "Graph API Nerd"
+    "Founder & Builder"
   ];
 
   var HERO_WORDS = [
     "AI systems",
-    "VR experiences",
-    "automation workflows",
+    "full-stack products",
+    "tools people use",
     "practical products"
   ];
 
   var ASK_ANSWERS = {
-    stack: "React, TypeScript, Node.js, OpenAI APIs, Supabase, PostgreSQL, Unity/C#, and cloud deployment (AWS, Azure).",
-    ai: "Multi-agent workflows, LLM integrations, human-in-the-loop review, and production-minded AI ops tooling.",
-    vr: "Unity VR for research and shipped Quest titles — physics, networking (Fusion), and Meta Quest SDK.",
+    stack: "React, TypeScript, Node.js, Claude/OpenAI APIs, Supabase, NeonDB, PostgreSQL, Unity/C#, and cloud deployment (AWS, Azure).",
+    ai: "RAG pipelines, LLM integrations, multi-agent workflows, human-in-the-loop systems, and production AI tooling.",
+    vr: "Unity VR for research and shipped Quest titles. Physics, networking (Fusion), and Meta Quest SDK.",
     contact: "Email m.bodenstein@outlook.com or use LinkedIn / GitHub links in the contact section.",
-    hire: "Open to collaborations on AI systems, full-stack product work, and immersive experiences. Reach out via email."
+    hire: "Open to full-time and contract roles, especially teams where I can own the build and work on real problems. Reach out via email."
   };
 
   var CMD_ITEMS = [
@@ -35,9 +34,10 @@
     { id: "projects", label: "Go to Projects", run: function () { location.hash = "#projects"; } },
     { id: "impact", label: "Go to Impact", run: function () { location.hash = "#impact"; } },
     { id: "talents", label: "Go to Talents", run: function () { location.hash = "#talents"; } },
+    { id: "arcade", label: "Go to Arcade", run: function () { location.hash = "#arcade"; } },
     { id: "contact", label: "Go to Contact", run: function () { location.hash = "#contact"; } },
     { id: "email", label: "Copy email address", run: copyEmail },
-    { id: "cv", label: "Open CV / Resume", run: function () { window.open("Matthew Bodenstein CV_Resume.pdf", "_blank", "noopener,noreferrer"); } },
+    { id: "cv", label: "Open CV / Resume", run: function () { window.open("Matthew_Bodenstein_Resume.pdf", "_blank", "noopener,noreferrer"); } },
     { id: "github", label: "Open GitHub", run: function () { window.open("https://github.com/MatthewBoden", "_blank", "noopener,noreferrer"); } },
     { id: "mode-recruiter", label: "Switch to Recruiter mode", run: function () { setAudienceMode("recruiter"); } },
     { id: "mode-builder", label: "Switch to Builder mode", run: function () { setAudienceMode("builder"); } },
@@ -209,7 +209,7 @@
       },
       mount: function () {
         wobbleProject("mount-mail");
-        toast("Mount & Mail — climb on.");
+        toast("Mount & Mail. Climb on.");
       },
       mail: function () {
         wobbleProject("mount-mail");
@@ -302,14 +302,14 @@
       footerClickTimer = setTimeout(function () { footerClickCount = 0; }, 900);
       if (footerClickCount >= 3) {
         footerClickCount = 0;
-        toast("Built with curiosity — opening thanks page in 2s…", 2200);
+        toast("Built with curiosity. Opening thanks page in 2s...", 2200);
         setTimeout(function () {
           window.location.href = "thanks.html";
         }, 2000);
         var link = document.createElement("a");
         link.href = "thanks.html";
         link.className = "footer-thanks-link";
-        link.textContent = "You found the secret — thanks for exploring.";
+        link.textContent = "You found the secret. Thanks for exploring.";
         var footer = year.closest("footer");
         if (footer && !footer.querySelector(".footer-thanks-link")) {
           footer.appendChild(link);
@@ -488,7 +488,7 @@
       out.scrollTop = out.scrollHeight;
     }
 
-    println("portfolio debug shell — type help");
+    println("portfolio debug shell - type help");
     input.addEventListener("keydown", function (e) {
       if (e.key !== "Enter") return;
       var cmd = input.value.trim().toLowerCase();
@@ -500,7 +500,7 @@
         });
       } else if (cmd === "projects") location.hash = "#projects";
       else if (cmd === "contact") location.hash = "#contact";
-      else if (cmd === "cv") window.open("Matthew Bodenstein CV_Resume.pdf", "_blank");
+      else if (cmd === "cv") window.open("Matthew_Bodenstein_Resume.pdf", "_blank");
       else if (cmd === "stack") println(ASK_ANSWERS.stack);
       else if (cmd === "clear") out.innerHTML = "";
       else if (cmd === "eggs") println("Try: deepseeker, bacon, mount, ?egg=kevin, Konami code");
@@ -524,7 +524,7 @@
   function initNowBuilding() {
     var el = $("#nowBuilding");
     if (!el) return;
-    var full = "Now building: Maxim internal AI-integrated operations platform · VUNO client products";
+    var full = "Now building: Maxim field operations & safety AI platform · VUNO client products";
     var short = "Now building: Maxim AI platform · VUNO client work";
     el.textContent = window.matchMedia("(max-width: 640px)").matches ? short : full;
     window.addEventListener("resize", function () {

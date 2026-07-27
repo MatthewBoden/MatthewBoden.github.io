@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Matthew Bodenstein | Lead AI Software Engineer</title>
+  <title>Matthew Bodenstein | Full-Stack Software Engineer</title>
   <meta name="description" content="Portfolio of Matthew Bodenstein, AI and full-stack engineer based in Toronto. Building shipped products across AI, web, and VR.">
   <meta name="description:recruiters" content="AI and full-stack engineer with shipped products at Maxim, CarGenie, and VUNO. Comfortable owning entire builds from architecture to deployment.">
   <meta name="description:clients" content="Builds AI-powered web products, dashboards, and automation tools. Full-stack delivery from design through deployment.">
@@ -14,11 +14,11 @@
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://matthewboden.github.io/">
-  <meta property="og:title" content="Matthew Bodenstein | Lead AI Software Engineer">
+  <meta property="og:title" content="Matthew Bodenstein | Full-Stack Software Engineer">
   <meta property="og:description" content="AI and full-stack engineer building shipped products across web, AI, and VR.">
   <meta property="og:image" content="https://matthewboden.github.io/img/about-img.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Matthew Bodenstein | Lead AI Software Engineer">
+  <meta name="twitter:title" content="Matthew Bodenstein | Full-Stack Software Engineer">
   <meta name="twitter:description" content="AI and full-stack engineer. Shipped products across web platforms, AI systems, and VR.">
   <meta name="twitter:image" content="https://matthewboden.github.io/img/about-img.jpg">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
@@ -628,6 +628,106 @@
       letter-spacing: 0.01em;
     }
 
+    .site-window {
+      display: block;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: #020611;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 220ms ease, transform 220ms ease;
+    }
+    .site-window:hover {
+      border-color: rgba(68, 217, 255, 0.45);
+      transform: translateY(-2px);
+    }
+    .site-window__bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .site-window__dots {
+      display: flex;
+      gap: 5px;
+    }
+    .site-window__dots i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.28);
+      display: block;
+    }
+    .site-window__dots i:nth-child(1) { background: #ff5f57; }
+    .site-window__dots i:nth-child(2) { background: #febc2e; }
+    .site-window__dots i:nth-child(3) { background: #28c840; }
+    .site-window__url {
+      flex: 1;
+      min-width: 0;
+      font-size: 0.7rem;
+      color: #9aa7c3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 6px;
+      padding: 3px 8px;
+    }
+    .site-window__screen {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #0a1228;
+    }
+    .site-window__screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 360ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .site-window:hover .site-window__screen img {
+        transform: scale(1.03);
+      }
+    }
+
+    .vuno-band {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background:
+        radial-gradient(520px 220px at 0% 0%, rgba(68, 217, 255, 0.12), transparent 55%),
+        radial-gradient(420px 200px at 100% 100%, rgba(139, 124, 255, 0.1), transparent 55%),
+        linear-gradient(180deg, rgba(11, 17, 37, 0.92), rgba(8, 12, 27, 0.94));
+      padding: 18px;
+    }
+    .vuno-band__grid {
+      display: grid;
+      gap: 22px;
+      align-items: center;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    }
+    .vuno-band__copy .project-kicker { margin-bottom: 10px; }
+    .vuno-band__copy h3 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+      letter-spacing: -0.02em;
+    }
+    .vuno-band__copy > p {
+      margin: 10px 0 0;
+      color: #c9d4ea;
+      font-size: 0.98rem;
+    }
+    .vuno-band .tags { margin-top: 14px; }
+    .vuno-band .project-outcome { margin-top: 16px; }
+    .vuno-band .project-actions { margin-top: 16px; }
+    @media (max-width: 860px) {
+      .vuno-band__grid { grid-template-columns: 1fr; }
+    }
+
     .timeline {
       display: grid;
       gap: 14px;
@@ -667,6 +767,17 @@
       font-size: 0.76rem;
       font-weight: 600;
       color: #bff4ff;
+    }
+    .timeline-points {
+      margin: 12px 0 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 8px;
+      color: #c9d4ea;
+      font-size: 0.92rem;
+    }
+    .timeline-points li::marker {
+      color: rgba(68, 217, 255, 0.75);
     }
 
     .case-modal {
@@ -894,8 +1005,40 @@
     footer {
       color: #8392b0;
       text-align: center;
-      padding: 28px 0 45px;
+      padding: 36px 0 52px;
       font-size: 0.87rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 24px;
+    }
+    .site-footer {
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+    }
+    .site-footer__nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 16px;
+    }
+    .site-footer__nav a {
+      color: #9aa7c3;
+      text-decoration: none;
+      font-size: 0.86rem;
+    }
+    .site-footer__nav a:hover {
+      color: #fff;
+    }
+    .site-footer__copy {
+      margin: 0;
+      max-width: 52ch;
+    }
+    .site-footer__disclaimer {
+      margin: 0;
+      max-width: 60ch;
+      color: #6f7d99;
+      font-size: 0.78rem;
+      line-height: 1.5;
     }
 
     .reveal {
@@ -1840,7 +1983,7 @@
         <button type="button" class="mode-chip" data-mode="builder">Builder</button>
         <button type="button" class="mode-chip" data-mode="technical">Technical</button>
       </div>
-      <span class="eyebrow">Lead AI Software Engineer</span>
+      <span class="eyebrow">Full-Stack Software Engineer</span>
       <h1 class="hero-name">Matthew Bodenstein</h1>
       <h2 class="hero-headline">AI developer building <span class="hero-typed" id="heroTyped">practical products</span>.</h2>
       <p>
@@ -1850,7 +1993,7 @@
       <div class="cta-row">
         <a class="btn btn-primary" href="#projects">View Projects</a>
         <a class="btn" href="#contact">Contact Me</a>
-        <a class="btn" href="Matthew_Bodenstein_Resume.pdf" target="_blank" rel="noopener noreferrer">View CV</a>
+        <a class="btn" href="Matthew_Bodenstein_Resume.pdf" download="Matthew_Bodenstein_Resume.pdf">Download Resume</a>
       </div>
     </section>
 
@@ -1875,20 +2018,20 @@
             <img class="profile-photo" src="img/about-img.jpg" alt="Matthew Bodenstein profile photo" onerror="this.style.display='none';">
           </div>
           <div class="mini">
+            <h3>Full-Stack Software Engineer</h3>
+            <p>Stealth-mode startup (Full-Time) — founding engineer building a consumer hardware + software product from the ground up.</p>
+          </div>
+          <div class="mini">
             <h3>Lead AI Software Engineer</h3>
-            <p>Maxim Mechanical Group Inc. (Contract) - designing and building the company's field operations and safety management platform.</p>
+            <p>Maxim Mechanical Group Inc. — built the full-stack workforce, EHS, HR, and ops platform, including the Frank AI ops assistant.</p>
           </div>
           <div class="mini">
             <h3>Founder &amp; Principal Engineer</h3>
-            <p>VUNO Digital Solutions (Sole Proprietor) - building full-stack web apps, dashboards, and AI automation tools for multiple clients.</p>
+            <p>VUNO Digital Solutions (Sole Proprietor) — building full-stack web apps, dashboards, and AI automation tools for multiple clients.</p>
           </div>
           <div class="mini">
             <h3>Full-Stack Software Engineer</h3>
-            <p>CarGenie.co (Contract) - sole engineer on the full platform build, growing to 1,000+ registered users.</p>
-          </div>
-          <div class="mini">
-            <h3>Research Assistant (Unity Developer)</h3>
-            <p>York University Sensorimotor Control Lab - built VR cognitive training applications used by 500+ research participants.</p>
+            <p>CarGenie.co — sole engineer on the full platform build, growing to 1,000+ registered users.</p>
           </div>
         </aside>
       </div>
@@ -1901,34 +2044,64 @@
       </div>
       <div class="timeline">
         <article class="timeline-item">
+          <h3 class="timeline-role">Full-Stack Software Engineer</h3>
+          <p class="timeline-meta">Stealth-Mode Startup, Full-Time · Toronto, ON (Hybrid)</p>
+          <span class="timeline-date">Aug 2026 - Present</span>
+          <ul class="timeline-points">
+            <li>Founding engineer at an early-stage startup building a consumer hardware + software product from the ground up; further details available on request.</li>
+          </ul>
+        </article>
+        <article class="timeline-item">
           <h3 class="timeline-role">Lead AI Software Engineer</h3>
-          <p class="timeline-meta">Maxim Mechanical Group Inc. (Contract) · Bradford, ON (Hybrid)</p>
-          <span class="timeline-date">Feb 2026 - Present</span>
+          <p class="timeline-meta">Maxim Mechanical Group Inc., Full-Time Contract · Bradford, ON (Hybrid)</p>
+          <span class="timeline-date">Feb 2026 - Aug 2026</span>
+          <ul class="timeline-points">
+            <li>Led design and development of a full-stack workforce, EHS, HR, and ops platform from scratch (React/TypeScript, Express/Prisma, Postgres) with RBAC — self-hosting saved $30,000+ annually versus off-the-shelf alternatives.</li>
+            <li>Built “Frank,” a Claude-powered AI ops assistant with streamed tool-calling and semantic document search; used daily by 50+ employees with 99%+ uptime over 6 months in production.</li>
+            <li>Shipped multi-party PDF signing and an automated invoice-extraction pipeline that cut manual AP/AR review time by over 60%.</li>
+          </ul>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Founder &amp; Principal Engineer</h3>
-          <p class="timeline-meta">VUNO Digital Solutions (Sole Proprietor) · Toronto, ON</p>
+          <p class="timeline-meta">VUNO Digital Solutions, Sole Proprietor · Toronto, ON</p>
           <span class="timeline-date">Dec 2025 - Present</span>
+          <ul class="timeline-points">
+            <li>Run an independent consultancy building full-stack web apps, internal dashboards, and AI automation tools for multiple concurrent clients.</li>
+            <li>Replaced a client’s paper-based approval workflow with a digital dashboard and multi-stage approval system.</li>
+          </ul>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Full-Stack Software Engineer</h3>
-          <p class="timeline-meta">CarGenie.co (Contract) · Toronto, ON (Hybrid)</p>
+          <p class="timeline-meta">CarGenie.co (AI Vehicle Recommendation Platform), Full-Time Contract · Toronto, ON (Hybrid)</p>
           <span class="timeline-date">May 2025 - Feb 2026</span>
+          <ul class="timeline-points">
+            <li>Sole engineer on the full platform build: GPT-4o recommendation engine with TypeScript, Node.js, and PostgreSQL, growing to 1,000+ registered users.</li>
+            <li>Quadrupled quiz-start engagement (~20% to 80% of visitors) and built admin dashboards, RBAC, analytics, and automated email campaigns.</li>
+          </ul>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Research Assistant (Unity Developer)</h3>
-          <p class="timeline-meta">York University Sensorimotor Control Lab (Part-Time Contract) · Toronto, ON (Remote)</p>
+          <p class="timeline-meta">York University Sensorimotor Control Lab, Part-Time Contract · Toronto, ON (Hybrid)</p>
           <span class="timeline-date">Jun 2024 - Aug 2025</span>
+          <ul class="timeline-points">
+            <li>Built VR cognitive training applications used by 500+ research participants; co-designed calibration tooling that cut setup time and reduced calibration errors.</li>
+          </ul>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Software Developer</h3>
-          <p class="timeline-meta">Ontario Government, Enterprise Architecture Office (Internship) · Toronto, ON</p>
+          <p class="timeline-meta">Ontario Government, Enterprise Architecture Office, Full-Time Internship · Toronto, ON</p>
           <span class="timeline-date">Jan 2024 - Jan 2025</span>
+          <ul class="timeline-points">
+            <li>Built a PyTorch document similarity model to flag duplicate project requests, improving resolution accuracy by 45%, plus AI automation pipelines for case routing.</li>
+          </ul>
         </article>
         <article class="timeline-item">
           <h3 class="timeline-role">Research Assistant (Software Developer)</h3>
-          <p class="timeline-meta">Lassonde School of Engineering, Dept. of Earth &amp; Space Science (Part-Time) · Toronto, ON (Remote)</p>
+          <p class="timeline-meta">Lassonde School of Engineering, Dept. of Earth &amp; Space Science, Part-Time Contract · Toronto, ON (Hybrid)</p>
           <span class="timeline-date">Aug 2023 - Apr 2024</span>
+          <ul class="timeline-points">
+            <li>Refactored and optimized a Python simulation codebase for 2D/3D Mars wind models; produced visualizations adopted in peer-reviewed research.</li>
+          </ul>
         </article>
       </div>
     </section>
@@ -2040,20 +2213,53 @@
       </div>
     </section>
 
+    <section id="vuno" class="container reveal">
+      <div class="section-head">
+        <h2>Consultancy</h2>
+        <p>Side by side with product work — I also run VUNO for client builds.</p>
+      </div>
+      <div class="vuno-band">
+        <div class="vuno-band__grid">
+          <a class="site-window" href="https://vunodigitalsolutions.com/" target="_blank" rel="noopener noreferrer" aria-label="Open VUNO Digital Solutions website">
+            <div class="site-window__bar">
+              <span class="site-window__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="site-window__url">vunodigitalsolutions.com</span>
+            </div>
+            <div class="site-window__screen">
+              <img src="img/portfolio/vuno.png" alt="VUNO Digital Solutions website preview" loading="lazy">
+            </div>
+          </a>
+          <div class="vuno-band__copy">
+            <span class="project-kicker">Business / Freelance</span>
+            <h3>VUNO Digital Solutions</h3>
+            <p>My consultancy — custom operations software and professional business websites for growing small businesses.</p>
+            <div class="tags">
+              <span class="tag">Custom Software</span><span class="tag">Business Websites</span><span class="tag">Dashboards</span><span class="tag">SEO</span>
+            </div>
+            <p class="project-outcome">Outcome: Live agency site with software + website service offerings.</p>
+            <div class="project-actions">
+              <a class="btn btn-primary" href="https://vunodigitalsolutions.com/" target="_blank" rel="noopener noreferrer">Visit Site</a>
+              <button class="btn case-open" type="button" data-case="vuno">Case Study</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="impact" class="container reveal">
       <div class="section-head">
         <h2>Experience &amp; Impact</h2>
-        <a class="btn impact-resume-btn" href="Matthew_Bodenstein_Resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
+        <a class="btn impact-resume-btn" href="Matthew_Bodenstein_Resume.pdf" download="Matthew_Bodenstein_Resume.pdf">Download Resume</a>
       </div>
       <div class="impact-grid">
         <article class="impact">
-          <h3>Built field operations &amp; safety AI platform</h3>
-          <p>Designed a Health &amp; Safety AI module with state-machine workflows and human-in-the-loop review gates, cutting manual safety reporting cycles by 40%.</p>
-          <span class="metric">30+ stakeholders coordinated</span>
+          <h3>Built ops platform + Frank AI assistant</h3>
+          <p>Led a full-stack workforce, EHS, HR, and ops platform from scratch, including a Claude-powered AI assistant used daily in production with 99%+ uptime.</p>
+          <span class="metric">$30k+/yr infra savings · 50+ daily users</span>
         </article>
         <article class="impact">
           <h3>Developed GPT car recommendation engine</h3>
-          <p>Sole engineer on the full platform build: architected a GPT-4o-powered recommendation engine with TypeScript, Node.js, and PostgreSQL.</p>
+          <p>Sole engineer on the full CarGenie platform: GPT-4o recommendations, admin dashboards, and email automation that quadrupled quiz-start engagement.</p>
           <span class="metric">1,000+ registered users</span>
         </article>
         <article class="impact">
@@ -2241,8 +2447,15 @@
     </div>
   </div>
 
-  <footer class="container">
-    <p>&copy; <span id="year"></span> Matthew Bodenstein. AI, full-stack, and product engineering portfolio.</p>
+  <footer class="container site-footer">
+    <nav class="site-footer__nav" aria-label="Legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="cookies.html">Cookie Policy</a>
+      <a href="accessibility.html">Accessibility</a>
+    </nav>
+    <p class="site-footer__copy">&copy; <span id="year"></span> Matthew Bodenstein. AI, full-stack, and product engineering portfolio.</p>
+    <p class="site-footer__disclaimer">Information on this website is provided for general purposes only and does not constitute legal, financial, or professional advice.</p>
   </footer>
 
   <div class="toast-host" id="toastHost" aria-live="polite"></div>
@@ -2287,7 +2500,7 @@
         "@type": "Person",
         "@id": "https://matthewboden.github.io/#person",
         "name": "Matthew Bodenstein",
-        "jobTitle": "Lead AI Software Engineer",
+        "jobTitle": "Full-Stack Software Engineer",
         "url": "https://matthewboden.github.io/",
         "image": "https://matthewboden.github.io/img/about-img.jpg",
         "sameAs": [
@@ -2722,6 +2935,16 @@
             { src: "img/portfolio/kevinBacon.png", caption: "Graph API project view" },
             { src: "img/portfolio/BlackHole.png", caption: "Supporting visualization" }
           ]
+        },
+        "vuno": {
+          title: "VUNO Digital Solutions",
+          problem: "Small businesses need custom ops tools and professional websites without enterprise complexity or generic templates.",
+          approach: "Positioned VUNO around two focused services — custom operations software and business websites — with high-touch implementation.",
+          architecture: "Marketing site plus client builds spanning dashboards, job tracking, time logging, SEO-ready websites, and lead capture.",
+          outcome: "Live consultancy site at vunodigitalsolutions.com offering software and website services.",
+          media: [
+            { src: "img/portfolio/vuno.png", caption: "VUNO site preview" }
+          ]
         }
       };
 
@@ -2782,7 +3005,7 @@
 
     function applyAudienceMode(mode) {
       var titleMap = {
-        recruiter: "Matthew Bodenstein | Lead AI Software Engineer",
+        recruiter: "Matthew Bodenstein | Full-Stack Software Engineer",
         builder: "Matthew Bodenstein | AI & Full-Stack Product Builder",
         technical: "Matthew Bodenstein | AI, Full-Stack, and VR Engineer"
       };

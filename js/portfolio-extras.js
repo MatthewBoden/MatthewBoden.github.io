@@ -8,8 +8,8 @@
 
   var NAME_TITLES = [
     "Matthew Bodenstein",
+    "Full-Stack Software Engineer",
     "Lead AI Software Engineer",
-    "Full-Stack Product Engineer",
     "Founder & Builder"
   ];
 
@@ -37,7 +37,14 @@
     { id: "arcade", label: "Go to Arcade", run: function () { location.hash = "#arcade"; } },
     { id: "contact", label: "Go to Contact", run: function () { location.hash = "#contact"; } },
     { id: "email", label: "Copy email address", run: copyEmail },
-    { id: "cv", label: "Open CV / Resume", run: function () { window.open("Matthew_Bodenstein_Resume.pdf", "_blank", "noopener,noreferrer"); } },
+    { id: "cv", label: "Download CV / Resume", run: function () {
+      var link = document.createElement("a");
+      link.href = "Matthew_Bodenstein_Resume.pdf";
+      link.download = "Matthew_Bodenstein_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } },
     { id: "github", label: "Open GitHub", run: function () { window.open("https://github.com/MatthewBoden", "_blank", "noopener,noreferrer"); } },
     { id: "mode-recruiter", label: "Switch to Recruiter mode", run: function () { setAudienceMode("recruiter"); } },
     { id: "mode-builder", label: "Switch to Builder mode", run: function () { setAudienceMode("builder"); } },
@@ -500,7 +507,15 @@
         });
       } else if (cmd === "projects") location.hash = "#projects";
       else if (cmd === "contact") location.hash = "#contact";
-      else if (cmd === "cv") window.open("Matthew_Bodenstein_Resume.pdf", "_blank");
+      else if (cmd === "cv") {
+        var link = document.createElement("a");
+        link.href = "Matthew_Bodenstein_Resume.pdf";
+        link.download = "Matthew_Bodenstein_Resume.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        println("Downloading resume...");
+      }
       else if (cmd === "stack") println(ASK_ANSWERS.stack);
       else if (cmd === "clear") out.innerHTML = "";
       else if (cmd === "eggs") println("Try: deepseeker, bacon, mount, ?egg=kevin, Konami code");
